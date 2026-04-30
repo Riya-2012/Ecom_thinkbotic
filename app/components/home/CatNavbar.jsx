@@ -17,7 +17,7 @@ export default function StickyCategoryNav() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShow(window.scrollY > 200); // 👈 trigger point
+      setShow(window.scrollY > 200); 
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -64,7 +64,7 @@ export default function StickyCategoryNav() {
             <p className="hover:text-[#1e4d3f] cursor-pointer">Deals</p>
           </div>
 
-          {/* RIGHT CTA */}
+  
           <div>
             <button className="bg-[#1e4d3f] text-white px-4 py-2 rounded-full text-sm hover:opacity-90 transition">
               Today’s Deal

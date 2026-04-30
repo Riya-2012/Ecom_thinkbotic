@@ -6,7 +6,6 @@ export default function Banner() {
       
       <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
 
-        {/* ================= LEFT ================= */}
         <div className="lg:col-span-2 h-[420px] bg-white rounded-3xl flex items-center justify-between px-10 relative overflow-hidden border">
 
           {/* TEXT */}
@@ -84,10 +83,10 @@ export default function Banner() {
           {/* BOTTOM CARD */}
        <div className="flex-1 relative rounded-3xl overflow-hidden group cursor-pointer">
 
-  {/* Background Gradient */}
+
   <div className="absolute inset-0 bg-gradient-to-r from-[#e6f4f1] to-white"></div>
 
-  {/* Hover Effect */}
+
   <div className="absolute inset-0 bg-[#1e4d3f]/5 opacity-0 group-hover:opacity-100 transition"></div>
 
   {/* Content */}
