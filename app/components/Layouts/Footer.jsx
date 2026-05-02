@@ -1,107 +1,98 @@
-import { FaPhone } from "react-icons/fa";
+import { FaPhone, FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
-import { TfiHeadphoneAlt } from "react-icons/tfi";
-import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa";
-import { FaYoutube } from "react-icons/fa";
-
+import Image from "next/image";
+import { IoLocationSharp } from "react-icons/io5";
 function Footer() {
   return (
-    <div>
+    <div className="mt-10 border-t" >
 
       {/* MAIN FOOTER */}
-      <div className="px-10 py-8 border-t  text-[#1e4d3f]">
+      <div className="px-6 lg:px-12 py-12 shadow-md text-white"> 
 
-        <div className="flex flex-col md:flex-row justify-between gap-8">
+        {/* GRID */}
+        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
-          {/* LEFT */}
-          <div className="flex-1">
+          
+          <div className="lg:col-span-2">
 
-            <div className="font-bold text-3xl pb-[30px] text-[#1e4d3f]">
-              THINKBOTIC
-            </div>
+            <Image src="/Logo.png" height={200} width={200} alt="logo" />
 
-            <div className="flex items-center gap-4 pb-[20px] text-[#1e4d3f]">
+            <p className="mt-4 text-black max-w-md text-sm leading-relaxed">
+              Thinkbotic Technology Pvt. Ltd. delivers innovative e-commerce and
+              digital solutions. We focus on quality, performance, and user-friendly
+              experiences to help businesses grow faster.
+            </p>
 
-              <TfiHeadphoneAlt size={40} />
-
-              <div>
-                <p className="text-sm">
-                  Got questions? Call us 24/7!
-                </p>
-                <p className="text-lg font-semibold">
-                  (+91) 888888888
-                </p>
-              </div>
-            </div>
-
-            <div className="pt-5 text-sm text-[#1e4d3f]">
-
-              <p className="font-semibold text-lg">
-                Contact Info
+            {/* Address*/}
+            <p className="flex items-center gap-1 text-sm hover:text-primary-blue text-black transition mt-6">
+                <IoLocationSharp className="text-primary-red"   size={22}/>
+                E-14, 3rd Floor, Sector-3, Noida, <br /> Uttar Pradesh - 201301, India
               </p>
-
-              <p className="text-[#334155]">
-                Radical Global: Plot no 110, New Dyneshwar Nagar,
-                Manewada Road, Nagpur - 440027
-              </p>
-
-              <p className="flex items-center gap-2 mt-2 text-[#1e4d3f]">
-                <IoIosMail /> info@thinkbotic.in
-              </p>
-
-            </div>
-
-            {/* SOCIAL ICONS */}
-            <div className="flex gap-6 pt-6 text-[#1e4d3f]">
-
-              <FaFacebookF size={25} className="hover:text-[#0f766e] cursor-pointer" />
-              <FaLinkedinIn size={25} className="hover:text-[#0f766e] cursor-pointer" />
-              <FaInstagram size={25} className="hover:text-[#0f766e] cursor-pointer" />
-              <FaYoutube size={25} className="hover:text-[#0f766e] cursor-pointer" />
-
-            </div>
-
+      
           </div>
 
           {/* QUICK LINKS */}
-          <div className="flex-1 text-[#1e4d3f]">
-            <h2 className="font-semibold text-lg mb-4">Quick Links</h2>
+          <div>
+            <h2 className="font-semibold text-lg text-primary-red mb-4">
+              Quick Links
+            </h2>
 
-            <ul className="space-y-2 text-[#334155]">
-              <li className="hover:text-[#1e4d3f] cursor-pointer">Home</li>
-              <li className="hover:text-[#1e4d3f] cursor-pointer">Products</li>
-              <li className="hover:text-[#1e4d3f] cursor-pointer">Cart</li>
-              <li className="hover:text-[#1e4d3f] cursor-pointer">Login</li>
+            <ul className="space-y-3 text-black text-sm">
+              <li className="hover:text-primary-blue cursor-pointer transition">
+                Home
+              </li>
+              <li className="hover:text-primary-blue cursor-pointer transition">
+                Products
+              </li>
+              <li className="hover:text-primary-blue cursor-pointer transition">
+                Cart
+              </li>
+              <li className="hover:text-primary-blue cursor-pointer transition">
+                Login
+              </li>
             </ul>
           </div>
 
           {/* CONTACT */}
-          <div className="flex-1 text-[#1e4d3f]">
+          <div>
+            <h2 className="font-semibold text-lg text-primary-red mb-4">
+              Contact
+            </h2>
 
-            <h2 className="font-semibold text-lg mb-4">Contact</h2>
+            <div className="space-y-4 text-black text-sm">
 
-            <div className="space-y-3 text-[#334155]">
-
-              <p className="flex items-center gap-2">
-                <FaPhone /> (+91) 888888888
+              <p className="flex items-center gap-2 hover:text-primary-blue transition">
+                <FaPhone className="text-primary-blue"   size={20}/>
+                (+91) 888888888
               </p>
 
-              <p className="flex items-center gap-2">
-                <IoIosMail /> support@thinkbotic.in
+              <p className="flex items-center gap-2 hover:text-primary-blue transition">
+                <IoIosMail className="text-primary-blue"   size={20}/>
+                support@thinkbotic.in
               </p>
 
             </div>
+                  <div className="flex gap-4 mt-6">
 
+              {[FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube].map((Icon, i) => (
+                <div
+                  key={i}
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-primary-red hover:bg-gradient-blue-red hover:text-primary-blue transition cursor-pointer"
+                >
+                  <Icon />
+                </div>
+              ))}
+
+            </div>
           </div>
 
         </div>
       </div>
 
-      {/* FOOTER BOTTOM */}
-      <div className="bg-[#1e4d3f] text-white text-center py-3 text-sm">
-        © SRK Innovations - All Rights Reserved Powered By Radical Global.
+      {/* BOTTOM */}
+      <div className=" bg-gradient-blue-red text-white text-center py-4 text-sm">
+        © SRK Innovations - All Rights Reserved | Powered by Thinkbotic
       </div>
 
     </div>

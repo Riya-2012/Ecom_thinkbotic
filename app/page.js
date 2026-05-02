@@ -6,6 +6,7 @@ import CollectionsSection from "./components/home/FeaturedCards";
 import Product from "./components/home/Product";
 import Slider from "./components/home/Slider";
 import TopRatedProducts from "./components/home/TopRated";
+import ContactForm from "./components/Layouts/ContactForm";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
 <CollectionsSection />
 <TopRatedProducts />
 <DealsSection />
+<ContactForm />
     </div>
   );
 }

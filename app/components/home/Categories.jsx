@@ -2,21 +2,34 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
+import "swiper/css";
+import "swiper/css/navigation";
 const data = {
   Electronics: [
     { name: "Smart Speaker", image: "/product-1.jpg", brand: "Dell" },
     { name: "Earbuds", image: "/product-2.jpg", brand: "Samsung" },
     { name: "Tablet", image: "/product-1.jpg", brand: "Microsoft" },
     { name: "Phone", image: "/product-2.jpg", brand: "Apple" },
+     { name: "laptop", image: "/product-2.jpg", brand: "Apple" },
+      { name: "camera", image: "/product-2.jpg", brand: "Apple" },
   ],
   Fashion: [
     { name: "Sneakers", image: "/product-1.jpg", brand: "Nike" },
     { name: "Jacket", image: "/product-2.jpg", brand: "Zara" },
   ],
-  Gaming: [
+ 
+   Gaming: [
     { name: "Console", image: "/p5.jpg", brand: "Sony" },
     { name: "Controller", image: "/p6.jpg", brand: "Xbox" },
+  ],
+   Electron: [
+    { name: "Smart Speaker", image: "/product-1.jpg", brand: "Dell" },
+    { name: "Earbuds", image: "/product-2.jpg", brand: "Samsung" },
+    { name: "Tablet", image: "/product-1.jpg", brand: "Microsoft" },
+    { name: "Phone", image: "/product-2.jpg", brand: "Apple" },
   ],
 };
 
@@ -28,7 +41,7 @@ export default function CategoryProducts() {
 
       <div className="max-w-[1400px] mx-auto">
 
-        {/* TITLE + TABS */}
+      
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
 
           <h2 className="text-2xl font-bold text-[#0f172a]">
@@ -41,49 +54,56 @@ export default function CategoryProducts() {
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`text-sm font-medium pb-1 transition ${
+                className={` relative text-sm font-medium pb-1 transition ${
                   active === cat
-                    ? "text-[#1e4d3f] border-b-2 border-[#1e4d3f]"
-                    : "text-gray-500 hover:text-[#1e4d3f]"
+                    ? "text-primary-blue b "
+                    : "text-gray-500 hover:text-primary-red"
                 }`}
               >
                 {cat}
+                  {active === cat && (
+    <span className="absolute left-0 bottom-0 w-full h-[2px]  bg-gradient-blue-red rounded-full"></span>
+  )}
               </button>
             ))}
           </div>
         </div>
 
-        {/* SLIDER */}
-        <div className="flex gap-6 overflow-x-auto scrollbar-hide">
+  <Swiper
+  modules={[Navigation]}
+  navigation
+  spaceBetween={20}
+  grabCursor={true}
+  breakpoints={{
+        320: { slidesPerView: 3 },
+    640: { slidesPerView: 2 },
+    768: { slidesPerView: 3 },
+    1024: { slidesPerView: 5 }, 
+  }}
+>
+  {data[active].map((item, i) => (
+    <SwiperSlide key={i} className="mb-4">
+      <div className="bg-[#f8fafc] shadow-sm rounded-2xl p-4 hover:shadow-md transition group">
 
-          {data[active].map((item, i) => (
-            <div
-              key={i}
-              className="min-w-[200px] bg-[#f8fafc] rounded-2xl p-4 hover:shadow-md transition group"
-            >
-              
-              {/* IMAGE */}
-              <div className="relative w-full h-[120px] mb-4">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  className="object-contain group-hover:scale-110 transition"
-                />
-              </div>
-
-              {/* TEXT */}
-              <p className="text-xs text-gray-500">{item.brand}</p>
-
-              <h3 className="font-semibold text-sm text-[#0f172a] mt-1">
-                {item.name}
-              </h3>
-
-            </div>
-          ))}
-
+        <div className="relative w-full h-[120px] mb-4">
+          <Image
+            src={item.image}
+            alt={item.name}
+            fill
+            className="object-contain group-hover:scale-110 transition"
+          />
         </div>
 
+        <p className="text-xs text-gray-500">{item.brand}</p>
+
+        <h3 className="font-semibold text-sm text-[#0f172a] mt-1">
+          {item.name}
+        </h3>
+
+      </div>
+    </SwiperSlide>
+  ))}
+</Swiper>
       </div>
     </div>
   );

@@ -1,52 +1,39 @@
-'use client'
+"use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 
 import "swiper/css";
-import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-import Image from "next/image";
+import ProductCard from "./Card";
 
-function Slider() {
+export default function ProductSlider({ products, title, variant = "default" }) {
   return (
-    <div>
+    <div className="w-full px-4 lg:px-10">
+
+      <h2 className="text-2xl font-bold mb-6 text-[#0f172a]">
+        {title}
+      </h2>
 
       <Swiper
-        modules={[Autoplay, Pagination]}
-        spaceBetween={50}
-        slidesPerView={1}
-        loop={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-          el: ".custom-pagination",
+        modules={[Navigation]}
+        navigation
+        spaceBetween={20}
+        grabCursor={true}
+        breakpoints={{
+          320: { slidesPerView: 2 },
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 4 },
         }}
       >
-        <SwiperSlide>
-          <Image src="/banner.webp" width={1200} height={400} className="w-full h-[400px] object-cover" alt="banner" />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Image src="/banner2.webp" width={1200} height={400} className="w-full h-[400px] object-cover" alt="banner" />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Image src="/banner.webp" width={1200} height={400} className="w-full h-[400px] object-cover" alt="banner" />
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <Image src="/banner2.webp" width={1200} height={400} className="w-full h-[400px] object-cover" alt="banner" />
-        </SwiperSlide>
+        {products.map((item, i) => (
+          <SwiperSlide className="mb-2" key={i}>
+            <ProductCard {...item} variant={variant} />
+          </SwiperSlide>
+        ))}
       </Swiper>
-
-      <div className="custom-pagination mt-4 flex justify-center"></div>
 
     </div>
   );
 }
-
-export default Slider;

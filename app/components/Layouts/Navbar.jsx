@@ -1,73 +1,139 @@
+"use client";
+
+import { useState } from "react";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import { CiHeart } from "react-icons/ci";
-import { FaSearch } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa";
+import { FaSearch, FaPhone, FaBars, FaTimes } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
+import Image from "next/image";
+import Link from "next/link";
 
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div>
 
-      {/* offer bar */}
-      <div className="bg-[#1e4d3f] text-white px-6 py-1">
-        <div className="flex justify-center">
-          <p>Free delivery on orders above ₹999</p>
-        </div>
-      </div>
-
-      {/* top bar */}
-      <div className="border-b px-6 py-1 flex justify-between bg-[#f4f2eb] text-[#1e4d3f]">
+      {/* TOP BAR (HIDE ON MOBILE) */}
+      <div className="hidden md:flex border-b px-6 py-1 justify-between bg-gradient-blue-red text-white text-sm">
 
         <div className="flex">
-          <div className="flex items-center gap-2 border-r pr-2">
+          <div className="flex items-center gap-2 border-r pr-3">
             <FaPhone /> (+91) 888888888
           </div>
-          <div className="flex items-center gap-2 ps-2">
+          <div className="flex items-center gap-2 pl-3">
             <IoIosMail /> thinkbotic@gmail.com
           </div>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex items-center gap-2">
           <FaPhone /> Support Available 24/7
         </div>
 
       </div>
 
-      {/* navbar */}
-      <div className="border-b px-6 py-6 sticky top-0 z-50 bg-white shadow">
+      {/* MAIN NAVBAR */}
+      <div className="px-4 md:px-6 py-4 sticky top-0 z-50 bg-white shadow-sm">
 
-        <div className="flex items-center justify-between gap-6">
+        <div className="flex items-center justify-between">
 
-          <h1 className="text-xl font-bold text-[#1e4d3f]">
-            THINKBOTIC
-          </h1>
+          {/* LEFT: LOGO */}
+         <Link href="/"> <Image src="/Logo.png" height={140} width={140} alt="logo" /></Link>
 
-          <div className="relative w-full max-w-lg">
+          {/* DESKTOP SEARCH */}
+          <div className="hidden md:flex w-full max-w-lg mx-6 border border-primary-blue rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-primary-blue transition">
+
             <input
               type="text"
               placeholder="Search products..."
-              className="w-full border px-4 py-2 pr-10 rounded-full focus:ring-2 focus:ring-[#1e4d3f]"
+              className="flex-1 px-4 py-2 outline-none"
             />
-            <FaSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
+
+            <div className="flex items-center justify-center px-6 border-l bg-gradient-blue text-white cursor-pointer">
+              <FaSearch />
+            </div>
+
           </div>
 
-          <div className="flex items-center gap-6">
+          {/* RIGHT (DESKTOP) */}
+          <div className="hidden md:flex items-center gap-5">
 
-            <CiHeart size={24} className="hover:text-red-500 text-gray-700" />
+            {/* HEART */}
+            <div className="relative cursor-pointer">
+              <CiHeart size={24} />
+              <span className="absolute -top-2 -right-2 bg-primary-red text-white text-[10px] px-1.5 rounded-full">
+                0
+              </span>
+            </div>
 
-            <RiShoppingCart2Line size={24} className="hover:text-[#1e4d3f] text-gray-700" />
+            {/* CART */}
+            <div className="relative cursor-pointer">
+              <RiShoppingCart2Line size={24} />
+              <span className="absolute -top-2 -right-2 bg-primary-blue text-white text-[10px] px-1.5 rounded-full">
+                0
+              </span>
+            </div>
 
-            <button className="px-4 py-1 border border-[#1e4d3f] text-[#1e4d3f] rounded-full hover:bg-[#1e4d3f] hover:text-white">
+            <button className="px-[15px] py-[10px] bg-primary-red font-bold text-white rounded-full text-sm">
               Sign Up
             </button>
 
-            <button className="px-4 py-1 bg-[#1e4d3f] text-white rounded-full hover:opacity-90">
+            <button className="px-[15px] py-[10px] font-bold bg-primary-blue text-white rounded-full text-sm">
               Sign In
             </button>
 
           </div>
 
+          {/* MOBILE MENU BUTTON */}
+          <div className="md:hidden flex items-center gap-4">
+
+            <CiHeart size={22} />
+            <RiShoppingCart2Line size={22} />
+
+            <button onClick={() => setMenuOpen(!menuOpen)}>
+              {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
+            </button>
+
+          </div>
+
         </div>
+
+        {/* MOBILE MENU */}
+        {menuOpen && (
+          <div className="md:hidden mt-4 space-y-4 border-t pt-4">
+
+            {/* SEARCH */}
+            <div className="flex border rounded-full overflow-hidden">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="flex-1 px-3 py-2 outline-none"
+              />
+              <div className="px-4 flex items-center bg-primary-blue text-white">
+                <FaSearch />
+              </div>
+            </div>
+
+            {/* LINKS */}
+            <div className="flex flex-col gap-3 text-sm">
+              <p className="cursor-pointer">Home</p>
+              <p className="cursor-pointer">Shop</p>
+              <p className="cursor-pointer">Collections</p>
+              <p className="cursor-pointer">Deals</p>
+            </div>
+
+            {/* BUTTONS */}
+            <div className="flex gap-3">
+              <button className="flex-1 bg-primary-red text-white py-2 rounded-full">
+                Sign Up
+              </button>
+              <button className="flex-1 bg-primary-blue text-white py-2 rounded-full">
+                Sign In
+              </button>
+            </div>
+
+          </div>
+        )}
 
       </div>
     </div>

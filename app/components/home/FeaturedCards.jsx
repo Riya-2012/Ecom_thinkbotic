@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { FaArrowRight } from "react-icons/fa";
 
 const collections = [
   {
@@ -26,17 +27,23 @@ export default function CollectionsSection() {
         {/* HEADER */}
         <div className="flex items-center justify-between mb-10">
           <div>
-            <p className="text-xs text-[#1e4d3f] uppercase tracking-wider">
-              Explore
-            </p>
+         <div className="flex items-center gap-2 mb-1">
+      <span className="w-2 h-2 bg-primary-red rounded-full"></span>
+      <p className="text-xs font-medium text-primary-red uppercase tracking-wider">
+        Explore
+      </p>
+    </div>
             <h2 className="text-2xl md:text-3xl font-bold text-[#0f172a]">
               Shop by Collections
             </h2>
           </div>
 
-          <button className="text-sm text-[#1e4d3f] hover:underline">
-            View All →
-          </button>
+          <div className="flex justify-center items-center gap-1 text-primary-blue hover:underline cursor-pointer">
+                    <button className="text-md font-bold text-primary-blue hover:underline">
+                    View All 
+                      </button>
+                      <FaArrowRight />
+                  </div>
         </div>
 
         {/* CARDS */}
@@ -64,7 +71,7 @@ export default function CollectionsSection() {
                 <h3 className="text-lg font-semibold">
                   {item.title}
                 </h3>
-                <p className="text-sm opacity-80">Shop Now →</p>
+                <p className="text-sm  opacity-80">Shop Now →</p>
               </div>
 
             </div>
