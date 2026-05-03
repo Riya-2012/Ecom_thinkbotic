@@ -38,7 +38,7 @@ function Navbar() {
         <div className="flex items-center justify-between">
 
           {/* LEFT: LOGO */}
-         <Link href="/"> <Image src="/Logo.png" height={140} width={140} alt="logo" /></Link>
+         <Link href="/"> <Image src="/Logo.png" height={140} width={140} alt="logo" style={{ width: "auto", height: "auto" }} /></Link>
 
           {/* DESKTOP SEARCH */}
           <div className="hidden md:flex w-full max-w-lg mx-6 border border-primary-blue rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-primary-blue transition">

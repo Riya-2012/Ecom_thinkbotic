@@ -46,6 +46,8 @@ export default function Banner() {
               src="/ban1.webp"
               alt="product"
               fill
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain"
             />
           </div>
@@ -63,6 +65,7 @@ export default function Banner() {
               src="/product-2.jpg"
               alt="headphone"
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover"
             />
 
@@ -115,6 +118,7 @@ export default function Banner() {
                   src="/product-1.jpg"
                   alt="vr"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-contain drop-shadow-lg"
                 />
               </div>

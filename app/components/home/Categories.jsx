@@ -90,6 +90,7 @@ export default function CategoryProducts() {
             src={item.image}
             alt={item.name}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-contain group-hover:scale-110 transition"
           />
         </div>

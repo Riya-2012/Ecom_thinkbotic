@@ -16,7 +16,7 @@ function Footer() {
           
           <div className="lg:col-span-2">
 
-            <Image src="/Logo.png" height={200} width={200} alt="logo" />
+            <Image src="/Logo.png" height={200} width={200} alt="logo" style={{ width: "auto", height: "auto" }} />
 
             <p className="mt-4 text-black max-w-md text-sm leading-relaxed">
               Thinkbotic Technology Pvt. Ltd. delivers innovative e-commerce and
