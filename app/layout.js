@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Layouts/Navbar";
 import Footer from "./components/Layouts/Footer";
-
+import CatNavbar from "./components/Layouts/CatNavbar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <Navbar />
-        
+        <CatNavbar />
         {children}
         <Footer />
         </body>

@@ -1,6 +1,6 @@
 import Banner from "./components/home/Banner";
 import Categories from "./components/home/Categories";
-import CatNavbar from "./components/home/CatNavbar";
+import CatNavbar from "./components/Layouts/CatNavbar";
 import DealsSection from "./components/home/Discount";
 import CollectionsSection from "./components/home/FeaturedCards";
 import Product from "./components/home/Product";

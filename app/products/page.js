@@ -4,14 +4,18 @@ import { useState } from "react";
 import ProductCard from "../components/home/Card";
 import { FaFilter, FaStar, FaChevronDown, FaCheck } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
+import Link from "next/link";
 
 const allProducts = [
   {
     image: "/product-1.jpg",
     title: "Smart Watch Elite",
     category: "Electronics",
+    subcategory: "Wearables",
+    brand: "Apple",
     price: 2999,
     oldPrice: 3999,
+    discount: 25,
     rating: 5,
     colors: ["#0f172a", "#3b82f6", "#ef4444"],
     sizes: ["One Size"],
@@ -20,8 +24,11 @@ const allProducts = [
     image: "/product-2.jpg",
     title: "Pro Noise-Canceling Headphones",
     category: "Audio",
+    subcategory: "Headphones",
+    brand: "Sony",
     price: 1299,
     oldPrice: 1999,
+    discount: 35,
     rating: 4,
     colors: ["#0f172a", "#94a3b8"],
     sizes: ["One Size"],
@@ -30,8 +37,11 @@ const allProducts = [
     image: "/product-1.jpg",
     title: "Urban Sneakers X1",
     category: "Fashion",
+    subcategory: "Shoes",
+    brand: "Nike",
     price: 1999,
     oldPrice: 2499,
+    discount: 20,
     rating: 3,
     colors: ["#ffffff", "#ef4444", "#10b981"],
     sizes: ["7", "8", "9", "10", "11"],
@@ -40,8 +50,11 @@ const allProducts = [
     image: "/product-2.jpg",
     title: "Wireless Earbuds Lite",
     category: "Audio",
+    subcategory: "Earbuds",
+    brand: "Boat",
     price: 899,
     oldPrice: 1299,
+    discount: 30,
     rating: 4,
     colors: ["#ffffff", "#0f172a"],
     sizes: ["One Size"],
@@ -50,8 +63,11 @@ const allProducts = [
     image: "/product-1.jpg",
     title: "Fitness Tracker Band",
     category: "Electronics",
+    subcategory: "Wearables",
+    brand: "Samsung",
     price: 1499,
     oldPrice: 1999,
+    discount: 25,
     rating: 5,
     colors: ["#3b82f6", "#ef4444", "#10b981"],
     sizes: ["One Size"],
@@ -60,75 +76,111 @@ const allProducts = [
     image: "/product-2.jpg",
     title: "Premium Leather Jacket",
     category: "Fashion",
+    subcategory: "Jackets",
+    brand: "Zara",
     price: 4999,
     oldPrice: 6999,
+    discount: 28,
+    rating: 5,
+    colors: ["#8b4513", "#0f172a"],
+    sizes: ["M", "L", "XL", "XXL"],
+  },
+  {
+    image: "/product-2.jpg",
+    title: "Premium Leather Jacket",
+    category: "Fashion",
+    subcategory: "Jackets",
+    brand: "Zara",
+    price: 4999,
+    oldPrice: 6999,
+    discount: 28,
+    rating: 5,
+    colors: ["#8b4513", "#0f172a"],
+    sizes: ["M", "L", "XL", "XXL"],
+  },
+  {
+    image: "/product-2.jpg",
+    title: "Premium Leather Jacket",
+    category: "Fashion",
+    subcategory: "Jackets",
+    brand: "Zara",
+    price: 4999,
+    oldPrice: 6999,
+    discount: 28,
     rating: 5,
     colors: ["#8b4513", "#0f172a"],
     sizes: ["M", "L", "XL", "XXL"],
   },
 ];
 
-const categories = ["All", "Electronics", "Audio", "Fashion"];
-const availableColors = ["#0f172a", "#3b82f6", "#ef4444", "#10b981", "#ffffff", "#8b4513", "#94a3b8"];
-const availableSizes = ["7", "8", "9", "10", "11", "M", "L", "XL", "XXL", "One Size"];
+const categories = ["All", "Electronics", "Audio", "Fashion","Audio2","Fashion2"];
 
+const subcategories = {
+  Electronics: ["Wearables", "Mobiles"],
+  Audio: ["Headphones", "Earbuds"],
+  Fashion: ["Shoes", "Jackets"],
+   Audio2: ["Headphones", "Earbuds"],
+  Fashion2: ["Shoes", "Jackets"],
+};
+const brands = ["Apple", "Sony", "Nike", "Boat", "Samsung", "Zara"];
+const Ratings=[ 5,4,3,2,1];
 export default function ProductsPage() {
   const [sort, setSort] = useState("default");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedColors, setSelectedColors] = useState([]);
-  const [selectedSizes, setSelectedSizes] = useState([]);
+
   const [priceRange, setPriceRange] = useState(10000);
+    const [discountRange, setDiscountRange] = useState(0);
+const [selectedSubCategory, setSelectedSubCategory] = useState("");
+const [openCategory, setOpenCategory] = useState("");
+const[selectedBrands,setSelectedBrands]=useState([]);
+ const[selectedRating,setSelectedRating]=useState(0);
+const[showBrands,setShowBrands]=useState(false);
 
-  // Toggle handlers
-  const toggleColor = (color) => {
-    setSelectedColors((prev) =>
-      prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]
-    );
-  };
-
-  const toggleSize = (size) => {
-    setSelectedSizes((prev) =>
-      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
-    );
-  };
-
-  // 🚀 Filtering logic
   let filteredProducts = allProducts.filter((product) => {
     // Category Filter
     if (selectedCategory !== "All" && product.category !== selectedCategory) return false;
     // Price Filter
     if (product.price > priceRange) return false;
-    // Color Filter (Product must have at least one of the selected colors)
-    if (selectedColors.length > 0 && !product.colors?.some((c) => selectedColors.includes(c))) return false;
-    // Size Filter
-    if (selectedSizes.length > 0 && !product.sizes?.some((s) => selectedSizes.includes(s))) return false;
-    
+ 
+   if (selectedBrands.length > 0 && !selectedBrands.includes(product.brand)) return false;
+   if (selectedRating && product.rating < selectedRating) return false;
     return true;
   });
 
-  // 🚀 Sorting logic
+  
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (sort === "low") return a.price - b.price;
     if (sort === "high") return b.price - a.price;
     if (sort === "rating") return b.rating - a.rating;
     return 0;
   });
+const toggleBrand = (brand) => {
+  setSelectedBrands((prev) =>
+    prev.includes(brand)
+      ? prev.filter((b) => b !== brand) 
+      : [...prev, brand] 
+  );
+};
+const handleRating = (rate) => {
+  setSelectedRating((prev) => (prev === rate ? 0 : rate));
+};
+const visibleBrands = showBrands ? brands : brands.slice(0, 2);
 
   return (
     <div className="bg-[#f8fafc] min-h-screen pb-16">
       
-      {/* 🔹 BREADCRUMB & HEADER */}
-      <div className="bg-white border-b border-gray-100 py-6 px-4 lg:px-10">
+      
+      <div className="bg-white  border-b border-gray-400 py-6 px-4 lg:px-10">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           
           <div>
             <p className="text-xs text-gray-500 mb-1.5 font-medium tracking-wide">
-              <span className="hover:text-primary-blue cursor-pointer transition">Home</span> / <span className="hover:text-primary-blue cursor-pointer transition">Shop</span> / <span className="text-[#0f172a] font-bold">All Products</span>
+             <Link href="/"> <span className="hover:text-primary-blue cursor-pointer transition">Home</span></Link> / <Link href="products"><span className="hover:text-primary-blue cursor-pointer transition">Shop</span></Link> / <span className="text-primary-blue font-bold">Products</span>
             </p>
             <h1 className="text-2xl sm:text-3xl font-bold text-[#0f172a] flex items-center gap-3">
-              Shop Products
-              <span className="text-sm font-medium bg-primary-blue/10 text-primary-blue px-3 py-1 rounded-full">{sortedProducts.length} items</span>
+              Products
+              {/* <span className="text-sm font-medium bg-primary-blue/10 text-primary-blue px-3 py-1 rounded-full">{sortedProducts.length} items</span> */}
             </h1>
           </div>
           
@@ -159,18 +211,27 @@ export default function ProductsPage() {
         </div>
       </div>
 
-      {/* 🔹 MAIN LAYOUT */}
-      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8 px-4 lg:px-10 mt-8 relative">
+    
+   <div className="flex  mt-0 relative">
+       <div className="">
 
-        {/* 🔹 SIDEBAR (Desktop: Sticky, Mobile: Off-canvas) */}
+       
         <div className={`
-          fixed lg:sticky top-0 lg:top-8 left-0 h-full lg:h-fit w-[300px] lg:w-[280px] 
-          bg-white lg:bg-transparent shadow-2xl lg:shadow-none z-50 lg:z-10
-          overflow-y-auto lg:overflow-visible transition-transform duration-300 ease-in-out
-          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+           fixed lg:sticky 
+            top-[0px] 
+            left-0 
+            h-[calc(100vh-88px)] 
+            w-[300px] lg:w-[250px]
+            bg-white lg:bg-transparent 
+            shadow-2xl lg:shadow-none 
+            z-50 lg:z-10
+            overflow-y-auto 
+            no-scrollbar
+            transition-transform duration-300
+            ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}>
           
-          <div className="bg-white rounded-none lg:rounded-3xl lg:border border-gray-100 p-6 lg:shadow-sm min-h-full lg:min-h-fit">
+          <div className=" rounded-none mt-0 pt-0 px-0  lg:border border-gray-100  lg:shadow-sm min-h-full lg:min-h-fit">
             
             {/* MOBILE CLOSE BTN */}
             <div className="flex justify-between items-center lg:hidden mb-8 border-b pb-4">
@@ -181,35 +242,85 @@ export default function ProductsPage() {
             </div>
 
             {/* CATEGORIES */}
-            <div className="mb-8">
-              <h4 className="font-semibold text-lg text-[#0f172a] mb-4 flex items-center gap-2">
-                <span className="w-1.5 h-6 bg-primary-red rounded-full"></span> Categories
-              </h4>
-              <ul className="space-y-3">
-                {categories.map((cat) => (
-                  <li key={cat}>
-                    <button
-                      onClick={() => setSelectedCategory(cat)}
-                      className={`w-full text-left text-[15px] flex items-center justify-between transition group ${
-                        selectedCategory === cat ? "text-primary-red font-bold" : "text-gray-600 hover:text-primary-blue"
-                      }`}
-                    >
-                      <span>{cat}</span>
-                      <span className={`text-xs px-2.5 py-1 rounded-full font-medium transition-colors ${selectedCategory === cat ? "bg-gradient-blue-red text-white shadow-sm" : "bg-gray-100 text-gray-500 group-hover:bg-primary-blue/10 group-hover:text-primary-blue"}`}>
-                        {cat === "All" ? allProducts.length : allProducts.filter(p => p.category === cat).length}
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+     <div className="mb-4  bg-white p-4" >
+  <h4 className="font-semibold text-lg  mb-4">
+    Categories
+  </h4>
 
-            <hr className="border-gray-100 my-6" />
+  <ul className="space-y-4">
+
+    {categories.map((cat) => (
+      <li key={cat}>
+
+        {/* CATEGORY BUTTON */}
+        <button
+          onClick={() => {
+            setSelectedCategory(cat);
+            setOpenCategory(openCategory === cat ? "" : cat);
+            setSelectedSubCategory("");
+          }}
+          className={`w-full text-left text-[15px] flex items-center justify-between transition group ${
+            selectedCategory === cat
+              ? "text-primary-red font-bold"
+              : "text-gray-600 hover:text-primary-blue"
+          }`}
+        >
+          <span>{cat}</span>
+
+          <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${
+            selectedCategory === cat
+              ? "bg-gradient-blue-red text-white"
+              : "bg-gray-100 text-gray-500"
+
+          }`}>
+            {cat === "All"
+              ? allProducts.length
+              : allProducts.filter(p => p.category === cat).length}
+          </span>
+        </button>
+
+        {/*  SUBCATEGORIES */}
+        {openCategory === cat && subcategories[cat] && (
+          <ul className="mt-2 ml-3 space-y-2 border-l-2 border-gray-100 pl-3">
+
+            {subcategories[cat].map((sub) => (
+              <li key={sub}>
+                <button
+                  onClick={() => setSelectedSubCategory(sub)}
+                  className={`text-sm flex justify-between w-full ${
+                    selectedSubCategory === sub
+                      ? "text-primary-blue font-semibold"
+                      : "text-gray-500 hover:text-primary-blue"
+                  }`}
+                >
+                  <span>{sub}</span>
+
+                  <span className="text-xs text-gray-400">
+                    {
+                      allProducts.filter(
+                        (p) => p.subcategory === sub
+                      ).length
+                    }
+                  </span>
+                </button>
+              </li>
+            ))}
+
+          </ul>
+        )}
+
+      </li>
+    ))}
+
+  </ul>
+</div>
+
+       
 
             {/* PRICE RANGE */}
-            <div className="mb-8">
+            <div className="mb-4 bg-white p-4">
               <div className="flex justify-between items-center mb-4">
-                <h4 className="font-semibold text-lg text-[#0f172a]">Price</h4>
+                <h4 className="font-semibold text-lg text-[#0f172a]">Price Range</h4>
                 <span className="text-xs font-bold text-primary-blue bg-primary-blue/10 px-2 py-1 rounded-md">
                   Up to ₹{priceRange}
                 </span>
@@ -221,18 +332,40 @@ export default function ProductsPage() {
                 step="500"
                 value={priceRange}
                 onChange={(e) => setPriceRange(Number(e.target.value))}
-                className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary-blue" 
+                className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary-red" 
               />
               <div className="flex justify-between text-xs text-gray-400 mt-3 font-medium">
                 <span>₹500</span>
-                <span>₹10,000+</span>
+                <span>₹139999</span>
+              </div>
+            
+
+          
+{/* DISCOUNT RANGE */}
+  
+              <div className="flex justify-between items-center mb-4 mt-4">
+                <h4 className="font-semibold text-lg text-[#0f172a]">Discount Range</h4>
+                <span className="text-xs font-bold text-primary-blue bg-primary-blue/10 px-2 py-1 rounded-md">
+                  Up to {discountRange}%
+                </span>
+              </div>
+              <input 
+                type="range" 
+                min="0%" 
+                max="100%" 
+                step="5"
+                value={discountRange}
+                onChange={(e) => setDiscountRange(Number(e.target.value))}
+                className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary-red " 
+              />
+              <div className="flex justify-between text-xs text-gray-400 mt-3 font-medium">
+                <span>0%</span>
+                <span>100%</span>
               </div>
             </div>
 
-            <hr className="border-gray-100 my-6" />
-
             {/* COLORS */}
-            <div className="mb-8">
+            {/* <div className="mb-8">
               <h4 className="font-semibold text-lg text-[#0f172a] mb-4">Colors</h4>
               <div className="flex flex-wrap gap-3">
                 {availableColors.map((color) => {
@@ -255,12 +388,135 @@ export default function ProductsPage() {
                   );
                 })}
               </div>
-            </div>
+            </div> */}
 
-            <hr className="border-gray-100 my-6" />
+            
+{/* BRANDS */}
+<div className="mb-4 bg-white p-4">
+  <h4 className="font-semibold text-lg text-[#0f172a] mb-4">
+    Brands
+  </h4>
 
+  <div className="space-y-1">
+
+    {visibleBrands.map((brand) => {
+      const isSelected = selectedBrands.includes(brand);
+
+      return (
+        <button
+          key={brand}
+          onClick={() => toggleBrand(brand)}
+          className={`w-full flex items-center justify-between text-sm px-3 py-2 rounded-lg transition ${
+            isSelected
+              ? "text-primary-red font-bold"
+              : "text-gray-600 hover:bg-gray-50"
+          }`}
+        >
+          <span>{brand}</span>
+
+          <span
+            className={`text-xs px-2.5 py-1 rounded-full font-medium ${
+              isSelected
+                ? "bg-gradient-blue-red text-white"
+                : "bg-gray-100 text-gray-500"
+            }`}
+          >
+            {
+              allProducts.filter((p) => p.brand === brand).length
+            }
+          </span>
+        </button>
+      );
+    })}
+
+    
+    {brands.length > 2 && (
+      <button
+        onClick={() => setShowBrands(!showBrands)}
+        className="text-sm text-primary-blue mt-2 hover:underline"
+      >
+        {showBrands ? "Show Less" : "Show More"}
+      </button>
+    )}
+
+  </div>
+
+  
+
+{/* Rating */}
+
+  <h4 className="font-semibold text-lg text-[#0f172a] mb-4 mt-4">
+    Ratings
+  </h4>
+
+  <div className="space-y-1">
+
+    {visibleBrands.map((rate) => {
+      const isSelected = selectedRating === rate;
+
+      return (
+        <button
+          key={rate}
+          onClick={() => handleRating(rate)}
+          className={`w-full flex items-center justify-between text-sm px-3 py-2 rounded-lg transition ${
+            isSelected
+              ? " text-primary-red font-bold"
+              : "text-gray-600 hover:bg-gray-50"
+          }`}
+        >
+          <span className="flex items-center gap-1">
+            {rate}
+            <FaStar className="text-yellow-400" />
+            & above
+          </span>
+
+{/*         
+          <span className="text-xs text-gray-400">
+            {
+              allProducts.filter((p) => p.rating >= rate).length
+            }
+          </span> */}
+             <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${
+             isSelected
+              ? "bg-gradient-blue-red text-white"
+              : "bg-gray-100 text-gray-500"
+
+          }`}>
+            {
+              allProducts.filter((p) => p.rating >= rate).length
+            }
+          </span>
+        </button>
+      );
+    })}
+ {Ratings.length > 2 && (
+      <button
+        onClick={() => setShowBrands(!showBrands)}
+        className="text-sm text-primary-blue mt-2 hover:underline"
+      >
+        {showBrands ? "Show Less" : "Show More"}
+      </button>
+    )}
+  </div>
+</div>
+
+  <button 
+                onClick={() => {
+                  setSelectedCategory("All");
+                  setPriceRange(10000);
+                setDiscountRange(0);
+                setSelectedBrands([]);
+                setSelectedRating(0);
+                setSelectedSubCategory("");
+
+
+                }}
+                className="bg-gradient-blue-red text-white px-4 py-2 rounded-xl font-medium hover:scale-105 transition-transform shadow-md ms-6"
+              >
+                Clear All Filters
+              </button>
             {/* SIZES */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <h4 className="font-semibold text-lg text-[#0f172a] mb-4">Size</h4>
               <div className="flex flex-wrap gap-2.5">
                 {availableSizes.map((size) => {
@@ -280,7 +536,7 @@ export default function ProductsPage() {
                   );
                 })}
               </div>
-            </div>
+            </div> */}
 
           </div>
         </div>
@@ -293,16 +549,19 @@ export default function ProductsPage() {
           ></div>
         )}
 
-        {/* 🔹 PRODUCTS GRID */}
-        <div className="flex-1">
+  
+</div>
+        {/* PRODUCTS*/}
+     
+ <div className="flex-1 px-4 lg:px-10 mt-8">
           {sortedProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
               {sortedProducts.map((item, index) => (
                 <ProductCard key={index} {...item} />
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-3xl p-10 text-center flex flex-col items-center justify-center min-h-[400px] border border-gray-100">
+            <div className="bg-white rounded-2xl p-10 text-center flex flex-col items-center justify-center min-h-[400px] border border-gray-100">
               <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-6">
                 <FaFilter className="text-gray-300 text-3xl" />
               </div>
@@ -314,8 +573,10 @@ export default function ProductsPage() {
                 onClick={() => {
                   setSelectedCategory("All");
                   setPriceRange(10000);
-                  setSelectedColors([]);
-                  setSelectedSizes([]);
+                   setDiscountRange(0);
+                setSelectedBrands([]);
+                setSelectedRating(0);
+                setSelectedSubCategory("");
                 }}
                 className="bg-gradient-blue-red text-white px-8 py-3 rounded-full font-medium hover:scale-105 transition-transform shadow-md"
               >
@@ -324,8 +585,9 @@ export default function ProductsPage() {
             </div>
           )}
         </div>
-
+   </div>
       </div>
-    </div>
+      
+    
   );
 }

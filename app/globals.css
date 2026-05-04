@@ -82,3 +82,14 @@
   transition: opacity 0.3s ease !important;
   pointer-events: none !important;
 }
+
+
+/* Hide scrollbar but keep scroll working */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE */
+  scrollbar-width: none;     /* Firefox */
+}
