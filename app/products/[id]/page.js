@@ -191,18 +191,18 @@ export default function Page({ params }) {
         
         <div className="bg-white rounded-2xl p-6 shadow-sm">
 
-          {/* NAME */}
-          <h1 className="text-2xl font-bold text-[#0f172a]">
-            {product.name}
-          </h1>
-
-          {/* BRAND */}
-          <p className="text-gray-500 mt-2">
+{/* BRAND */}
+          <p className="text-primary-red font-semibold  mt-2">
             Brand: {product.Brand}
           </p>
+          {/* NAME */}
+          <h1 className="text-3xl font-bold text-[#0f172a]">
+            {product.name}
+          </h1>
+<p className=" pt-0 pb-4 text-gray-600 ">  {product.descriptions} </p>
 
           {/* CATEGORY */}
-          <p className="text-gray-500 text-sm">
+          <p className="text-primary-blue    text-sm">
             {product.category} / {product.subCategory}
           </p>
 
@@ -237,21 +237,28 @@ export default function Page({ params }) {
             <span className="text-green-600 font-medium">
               {product.discount}% off
             </span>
+
           </div>
 
           {/* GST */}
-          <p className="text-sm text-gray-500 mt-1">
-            Inclusive of GST ({product.gst}%)
+         <div className="flex gap-6  items-center">
+             <p className="text-sm text-gray-500 mt-1 ">
+            Inclusive of GST ({product.gst}%) 
+            
           </p>
+          <span className=" text-primary-red font-bold text-sm justify-content ">Limited time offer</span>
+         </div>
 
           {/* STOCK */}
-          <p className="mt-2 text-green-600 font-medium">
-            {product.stockStatus}
-          </p>
+        <div className="mt-4 mb-4">
+              <span className=" text-white bg-primary-blue border-2 px-4  py-1 rounded-lg  font-medium">
+          {product.stockStatus}
+          </span>
+        </div>
 
           {/* DESCRIPTION */}
           <p className="mt-5 text-gray-600">
-            {product.productDescription}
+           Description: {product.productDescription}
           </p>
 
          
