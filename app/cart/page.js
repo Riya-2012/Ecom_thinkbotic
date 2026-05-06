@@ -178,7 +178,7 @@ function page() {
   </div>
 
   {/* RIGHT SIDE */}
-  <div className="bg-white p-6 rounded-2xl shadow-sm  h-fit sticky top-24">
+  <div className=" p-2 rounded-2xl   h-fit sticky top-24">
 
     <h2 className="text-xl font-bold mb-4">
       Order Summary

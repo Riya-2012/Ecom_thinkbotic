@@ -117,7 +117,7 @@ export default function SignupPage() {
                 value={formData.username}
                 onChange={handleChange}
                 placeholder=" "
-                className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/10 outline-none transition-all"
+                className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-md bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/10 outline-none transition-all"
               />
 
               <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm">
@@ -138,7 +138,7 @@ export default function SignupPage() {
                   value={formData.firstName}
                   onChange={handleChange}
                   placeholder=" "
-                  className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
+                  className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-md bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
                 />
 
                 <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm">
@@ -156,7 +156,7 @@ export default function SignupPage() {
                   value={formData.lastName}
                   onChange={handleChange}
                   placeholder=" "
-                  className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
+                  className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-md bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
                 />
 
                 <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm">
@@ -177,7 +177,7 @@ export default function SignupPage() {
                   name="gender"
                   value={formData.gender}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all text-gray-600"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-md bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all text-gray-600"
                 >
                   <option value="">Select Gender</option>
                   <option value="Male">Male</option>
@@ -197,7 +197,7 @@ export default function SignupPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder=" "
-                  className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
+                  className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-md bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
                 />
 
                 <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm">
@@ -218,7 +218,7 @@ export default function SignupPage() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder=" "
-                className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
+                className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-md bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
               />
 
               <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm">
@@ -281,7 +281,7 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2 rounded-2xl bg-gradient-blue text-white font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
+              className="w-full py-2 rounded-md bg-gradient-blue text-white font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
             >
               {loading ? "Creating Account..." : "Sign Up"}
             </button>

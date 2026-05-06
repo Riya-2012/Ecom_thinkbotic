@@ -411,7 +411,7 @@ export default function Page({ params }) {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-600 shrink-0">
+              <div className="w-12 h-12 rounded-full bg-green-50  flex items-center justify-center text-green-600 shrink-0">
                 <FaShieldAlt size={20} />
               </div>
               <div className="text-sm">
@@ -452,7 +452,7 @@ export default function Page({ params }) {
               <div className={`px-5 overflow-hidden transition-all duration-300 ${activeTab === "specs" ? "max-h-96 pb-5 opacity-100" : "max-h-0 opacity-0"}`}>
                 <div className="flex flex-col gap-3 mt-2">
                   {product.specifications?.map((spec, i) => (
-                    <div key={i} className="flex justify-between py-3 border-b border-gray-50 last:border-0">
+                    <div key={i} className="flex justify-between py-3 border-b border-gray-50 last:border-0"> 
                       <span className="text-gray-500">{spec.key}</span>
                       <span className="font-semibold text-gray-900 text-right">{spec.value}</span>
                     </div>
@@ -463,7 +463,7 @@ export default function Page({ params }) {
 
             {/* Offers Tab */}
             <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
-              <button
+              <button 
                 onClick={() => setActiveTab(activeTab === "offers" ? "" : "offers")}
                 className="w-full flex justify-between items-center p-5 font-bold text-gray-900 hover:bg-gray-50 transition-colors"
               >
@@ -511,9 +511,7 @@ export default function Page({ params }) {
         <div
           key={index}
           className="grid grid-cols-3 px-6 py-4 border-b border-gray-100 last:border-0"
-        >
-
-        
+        >    
           <p className="text-gray-500 font-medium">
             {info.key}
           </p>
