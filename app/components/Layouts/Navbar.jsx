@@ -21,7 +21,7 @@ function Navbar() {
           <div className="flex items-center gap-2 border-r pr-3">
             <FaPhone /> (+91) 888888888
           </div>
-          <div className="flex items-center gap-2 pl-3">
+          <div className="flex items-center gap-2 pl-3 ">
             <IoIosMail /> thinkbotic@gmail.com
           </div>
         </div>
@@ -55,12 +55,11 @@ function Navbar() {
 
           </div>
 
-          {/* RIGHT (DESKTOP) */}
           <div className="hidden md:flex items-center gap-5">
 
             {/* HEART */}
             <div className="relative cursor-pointer">
-              <CiHeart size={24} />
+              <Link href="/whishlist"><CiHeart size={24} /></Link>
               <span className="absolute -top-2 -right-2 bg-primary-red text-white text-[10px] px-1.5 rounded-full">
                 0
               </span>
@@ -74,17 +73,21 @@ function Navbar() {
               </span>
             </div>
 
+        <Link href="/signup">
             <button className="px-[15px] py-[10px] bg-primary-red font-bold text-white rounded-full text-sm">
               Sign Up
             </button>
+        </Link>
 
+           <Link href="/signin">
             <button className="px-[15px] py-[10px] font-bold bg-primary-blue text-white rounded-full text-sm">
               Sign In
             </button>
+           </Link>
 
           </div>
 
-          {/* MOBILE MENU BUTTON */}
+        
           <div className="md:hidden flex items-center gap-4">
 
             <CiHeart size={22} />
@@ -98,7 +101,7 @@ function Navbar() {
 
         </div>
 
-        {/* MOBILE MENU */}
+  {/* mobile */}
         {menuOpen && (
           <div className="md:hidden mt-4 space-y-4 border-t pt-4">
 

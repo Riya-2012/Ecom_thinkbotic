@@ -31,7 +31,62 @@
   ],
   "offers": [
     { "key": "Bank Offer", "value": "10% cashback" }
-  ]
+  ],
+  "quesAns": [
+  {
+    "userId": "64f1a1a1a1a1a1a1a1a1a1b1",
+    "key": "Does it support Bluetooth calling?",
+    "value": "Yes, it supports Bluetooth calling."
+  },
+  {
+    "userId": "64f1a1a1a1a1a1a1a1a1a1b2",
+    "key": "Is it waterproof?",
+    "value": "Yes, it has IP68 water resistance."
+  },
+  {
+    "userId": "64f1a1a1a1a1a1a1a1a1a1b3",
+    "key": "Battery backup?",
+    "value": "Battery lasts around 2 days on normal usage."
+  }
+],
+"reviews": [
+  {
+    "userId": "64f1a1a1a1a1a1a1a1a1a1a1",
+    "rating": 5,
+    "key": "Excellent Product",
+    "value": "The smartwatch is amazing. Battery lasts long and display is very sharp."
+  },
+  {
+    "userId": "64f1a1a1a1a1a1a1a1a1a1a2",
+    "rating": 4,
+    "key": "Good but pricey",
+    "value": "Works perfectly but a bit expensive compared to competitors."
+  },
+  {
+    "userId": "64f1a1a1a1a1a1a1a1a1a1a3",
+    "rating": 3,
+    "key": "Average",
+    "value": "Decent features but expected better build quality."
+  }
+],
+"otherinfo": [
+  {
+    "key": "Country of Origin",
+    "value": "India"
+  },
+  {
+    "key": "Manufacturer",
+    "value": "Apple Pvt Ltd"
+  },
+  {
+    "key": "Package Includes",
+    "value": "1 Smartwatch, Charger, User Manual"
+  },
+  {
+    "key": "Model Number",
+    "value": "SW-2025-X"
+  }
+]
 },
 {
   "name": "Pro Noise Cancelling Headphones",

@@ -136,7 +136,7 @@ const [openCategory, setOpenCategory] = useState("");
 const[selectedBrands,setSelectedBrands]=useState([]);
  const[selectedRating,setSelectedRating]=useState(0);
 const[showBrands,setShowBrands]=useState(false);
-
+const[showRatings,setShowRatings]=useState(false);
   let filteredProducts = allProducts.filter((product) => {
     // Category Filter
     if (selectedCategory !== "All" && product.category !== selectedCategory) return false;
@@ -166,12 +166,12 @@ const handleRating = (rate) => {
   setSelectedRating((prev) => (prev === rate ? 0 : rate));
 };
 const visibleBrands = showBrands ? brands : brands.slice(0, 2);
-
+const visibleRatings = showRatings ? Ratings : Ratings.slice(0, 2);
   return (
     <div className="bg-[#f8fafc] min-h-screen pb-16">
       
       
-      <div className="bg-white  border-b border-gray-400 py-6 px-4 lg:px-10">
+      <div className="bg-white  border-b border-gray-400 py-2 px-4 lg:px-10">
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           
           <div>
@@ -242,12 +242,12 @@ const visibleBrands = showBrands ? brands : brands.slice(0, 2);
             </div>
 
             {/* CATEGORIES */}
-     <div className="mb-4  bg-white p-4" >
+     <div className="mb-4  bg-white p-6" >
   <h4 className="font-semibold text-lg  mb-4">
     Categories
   </h4>
 
-  <ul className="space-y-4">
+  <ul className="space-y-4 ">
 
     {categories.map((cat) => (
       <li key={cat}>
@@ -318,7 +318,7 @@ const visibleBrands = showBrands ? brands : brands.slice(0, 2);
        
 
             {/* PRICE RANGE */}
-            <div className="mb-4 bg-white p-4">
+            <div className="mb-4 bg-white p-6">
               <div className="flex justify-between items-center mb-4">
                 <h4 className="font-semibold text-lg text-[#0f172a]">Price Range</h4>
                 <span className="text-xs font-bold text-primary-blue bg-primary-blue/10 px-2 py-1 rounded-md">
@@ -392,7 +392,7 @@ const visibleBrands = showBrands ? brands : brands.slice(0, 2);
 
             
 {/* BRANDS */}
-<div className="mb-4 bg-white p-4">
+<div className="mb-4 bg-white p-6">
   <h4 className="font-semibold text-lg text-[#0f172a] mb-4">
     Brands
   </h4>
@@ -451,7 +451,7 @@ const visibleBrands = showBrands ? brands : brands.slice(0, 2);
 
   <div className="space-y-1">
 
-    {visibleBrands.map((rate) => {
+    {visibleRatings.map((rate) => {
       const isSelected = selectedRating === rate;
 
       return (
@@ -491,10 +491,10 @@ const visibleBrands = showBrands ? brands : brands.slice(0, 2);
     })}
  {Ratings.length > 2 && (
       <button
-        onClick={() => setShowBrands(!showBrands)}
+        onClick={() => setShowRatings(!showRatings)}
         className="text-sm text-primary-blue mt-2 hover:underline"
       >
-        {showBrands ? "Show Less" : "Show More"}
+        {showRatings ? "Show Less" : "Show More"}
       </button>
     )}
   </div>
@@ -513,7 +513,7 @@ const visibleBrands = showBrands ? brands : brands.slice(0, 2);
                 }}
                 className="bg-gradient-blue-red text-white px-4 py-2 rounded-xl font-medium hover:scale-105 transition-transform shadow-md ms-6"
               >
-                Clear All Filters
+                Clear Filters
               </button>
             {/* SIZES */}
             {/* <div className="mb-6">
@@ -580,7 +580,7 @@ const visibleBrands = showBrands ? brands : brands.slice(0, 2);
                 }}
                 className="bg-gradient-blue-red text-white px-8 py-3 rounded-full font-medium hover:scale-105 transition-transform shadow-md"
               >
-                Clear All Filters
+                Clear Filters
               </button>
             </div>
           )}

@@ -1,17 +1,20 @@
 "use client";
 
+import ProductSlider from "@/app/components/home/Slider";
+import TopRatedProducts from "@/app/components/home/TopRated";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, use } from "react";
-import { 
-  FaStar, FaStarHalfAlt, FaRegStar, 
-  FaShoppingCart, FaBolt, FaChevronDown, 
-  FaChevronUp, FaCheckCircle, FaShieldAlt, 
-  FaTags, FaTruck, FaUserCircle 
+import {
+  FaStar, FaStarHalfAlt, FaRegStar,
+  FaShoppingCart, FaBolt, FaChevronDown,
+  FaChevronUp, FaCheckCircle, FaShieldAlt,
+  FaTags, FaTruck, FaUserCircle,
+  FaArrowRight
 } from "react-icons/fa";
 
 export default function Page({ params }) {
-  const { id } = use(params);
+  // const { id } = use(params);
 
   const products = [
     {
@@ -63,6 +66,61 @@ export default function Page({ params }) {
         { "key": "Bank Offer", "value": "5% Unlimited Cashback on Flipkart Axis Bank Credit Card" },
         { "key": "Special Price", "value": "Get extra 10% off (price inclusive of cashback/coupon)" },
         { "key": "No Cost EMI", "value": "Avail No Cost EMI on select cards for orders above ₹3000" }
+      ],
+      "quesAns": [
+        {
+          "userId": "64f1a1a1a1a1a1a1a1a1a1b1",
+          "key": "Does it support Bluetooth calling?",
+          "value": "Yes, it supports Bluetooth calling."
+        },
+        {
+          "userId": "64f1a1a1a1a1a1a1a1a1a1b2",
+          "key": "Is it waterproof?",
+          "value": "Yes, it has IP68 water resistance."
+        },
+        {
+          "userId": "64f1a1a1a1a1a1a1a1a1a1b3",
+          "key": "Battery backup?",
+          "value": "Battery lasts around 2 days on normal usage."
+        }
+      ],
+      "reviews": [
+        {
+          "userId": "64f1a1a1a1a1a1a1a1a1a1a1",
+          "rating": 5,
+          "key": "Excellent Product",
+          "value": "The smartwatch is amazing. Battery lasts long and display is very sharp."
+        },
+        {
+          "userId": "64f1a1a1a1a1a1a1a1a1a1a2",
+          "rating": 4,
+          "key": "Good but pricey",
+          "value": "Works perfectly but a bit expensive compared to competitors."
+        },
+        {
+          "userId": "64f1a1a1a1a1a1a1a1a1a1a3",
+          "rating": 3,
+          "key": "Average",
+          "value": "Decent features but expected better build quality."
+        }
+      ],
+      "otherinfo": [
+        {
+          "key": "Country of Origin",
+          "value": "India"
+        },
+        {
+          "key": "Manufacturer",
+          "value": "Apple Pvt Ltd"
+        },
+        {
+          "key": "Package Includes",
+          "value": "1 Smartwatch, Charger, User Manual"
+        },
+        {
+          "key": "Model Number",
+          "value": "SW-2025-X"
+        }
       ]
     },
     {
@@ -99,15 +157,43 @@ export default function Page({ params }) {
       "offers": [
         { "key": "Bank Offer", "value": "10% cashback" }
       ]
-    }
+    },
+    {
+      image: "/product-1.jpg",
+      title: "Stylish Shoes",
+      category: "Footwear",
+      price: 999,
+      oldPrice: 1499,
+    },
+    {
+      image: "/product-2.jpg",
+      title: "Cool Sneakers",
+      category: "Shoes",
+      price: 1299,
+      oldPrice: 1799,
+    },
+    {
+      image: "/product-1.jpg",
+      title: "Running Shoes",
+      category: "Sports",
+      price: 1599,
+      oldPrice: 2099,
+    },
+    {
+      image: "/product-2.jpg",
+      title: "Stylish Shoes",
+      category: "Footwear",
+      price: 999,
+      oldPrice: 1499,
+    },
   ];
 
-  const product = products.find(p => p.id === id) || products[0];
+  const product = products[0];
 
   const [selectedColorIdx, setSelectedColorIdx] = useState(0);
   const currentImageSet = product.images?.[selectedColorIdx]?.imageSet || [product.img];
   const [selectedImage, setSelectedImage] = useState(currentImageSet[0]);
-  
+  const [activeIndex, setActiveIndex] = useState(null);
   const [qty, setQty] = useState(1);
   const [activeTab, setActiveTab] = useState("description");
 
@@ -120,7 +206,7 @@ export default function Page({ params }) {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
-    
+
     for (let i = 0; i < 5; i++) {
       if (i < fullStars) {
         stars.push(<FaStar key={i} className="text-yellow-400" />);
@@ -135,40 +221,33 @@ export default function Page({ params }) {
 
   return (
     <div className="bg-[#f8fafc] min-h-screen pb-20">
-      {/* HEADER / BREADCRUMBS */}
-      <div className="bg-white border-b border-gray-100 py-4 px-4 lg:px-10 sticky top-0 z-10 shadow-sm">
-        <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-          <p className="text-xs text-gray-500 font-medium tracking-wide">
-            <Link href="/"><span className="hover:text-primary-blue cursor-pointer transition-colors duration-200">Home</span></Link> 
-            <span className="mx-2">/</span> 
-            <Link href="/products"><span className="hover:text-primary-blue cursor-pointer transition-colors duration-200">{product.category}</span></Link> 
-            <span className="mx-2">/</span> 
-            <span className="text-gray-900 font-bold truncate max-w-[200px] sm:max-w-md inline-block align-bottom">{product.name}</span>
-          </p>
-        </div>
-      </div>
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-10 py-8 lg:py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
 
-      <div className="max-w-[1400px] mx-auto px-4 lg:px-10 py-8 lg:py-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
 
-        {/* LEFT COLUMN - IMAGES (Spans 6 columns on large screens) */}
-        <div className="lg:col-span-6 flex flex-col gap-6 lg:sticky lg:top-24 lg:h-fit">
-          
+        <div className="lg:col-span-6 flex flex-col gap-6 lg:sticky lg:top-24 lg:h-fit ">
+  <div>
+            <p className="text-[13px] text-gray-500 mb-[2px] font-medium tracking-wide">
+              <Link href="/"> <span className="hover:text-primary-blue cursor-pointer transition">Home</span></Link> / <Link href="/products"><span className="hover:text-primary-blue cursor-pointer transition">Shop</span></Link> / <span className="text-primary-blue font-bold">{product.name}</span>
+            </p>
+           
+          </div>
           {/* MAIN IMAGE */}
-          <div className="relative w-full h-[350px] sm:h-[400px] lg:h-[500px] bg-white rounded-3xl shadow-sm border border-gray-100 flex items-center justify-center overflow-hidden group">
-            <div className="relative w-full h-full transition-transform duration-500 ease-out group-hover:scale-105">
+          <div className="relative w-full h-full h-[350px] sm:h-[400px] lg:h-[500px]  bg-white rounded-3xl shadow-sm border border-gray-100 flex items-center justify-center overflow-hidden group">
+            <div className="relative w-[900px] h-[900px] transition-transform duration-500 ease-out group-hover:scale-105">
               <Image
                 src={selectedImage}
                 fill
                 priority
-                className="object-contain p-8 lg:p-12 drop-shadow-xl"
+                className="object-contain drop-shadow-xl"
                 alt={product.name}
-              />
+              // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+               />
             </div>
-            
+
             {/* Badges */}
-            <div className="absolute top-6 left-6 flex flex-col gap-2">
+            <div className="absolute top-6 left-8 flex flex-col gap-2">
               {product.discount > 0 && (
-                <span className="bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+                <span className="bg-primary-red text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
                   -{product.discount}%
                 </span>
               )}
@@ -184,15 +263,14 @@ export default function Page({ params }) {
             </div>
           </div>
 
-          {/* THUMBNAILS (Horizontal below the main image) */}
+
           <div className="flex gap-4 overflow-x-auto no-scrollbar py-2 justify-start sm:justify-center">
             {currentImageSet.map((img, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedImage(img)}
-                className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border-2 overflow-hidden transition-all duration-300 flex-shrink-0 bg-white ${
-                  selectedImage === img ? 'border-primary-blue ring-4 ring-blue-50 scale-105 shadow-sm' : 'border-transparent border-gray-100 hover:border-gray-300 hover:scale-105'
-                }`}
+                className={`relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border-2 overflow-hidden transition-all duration-300 flex-shrink-0 bg-white ${selectedImage === img ? 'border-primary-blue ring-4 ring-blue-50 scale-105 shadow-sm' : 'border-transparent border-gray-100 hover:border-gray-300 hover:scale-105'
+                  }`}
               >
                 <Image
                   src={img}
@@ -205,18 +283,18 @@ export default function Page({ params }) {
           </div>
         </div>
 
-        {/* RIGHT COLUMN - PRODUCT DETAILS (Spans 6 columns) */}
-        <div className="lg:col-span-6 flex flex-col gap-6">
-          
+
+        <div className="lg:col-span-6 flex flex-col gap-6  max-h-[1400px] no-scrollbar ">
+
           {/* TITLE & BRAND */}
           <div>
             <div className="flex justify-between items-start mb-3">
               <span className="text-primary-blue font-bold tracking-wider text-xs uppercase bg-blue-50 px-3 py-1 rounded-full">
                 {product.Brand}
               </span>
-              <span className="text-gray-400 text-sm font-medium">{product.stock} left in stock</span>
+              {/* <span className="text-primary-red px-3 py-1 rounded-full bg-red-50 text-sm font-medium">{product.stock} left in stock</span> */}
             </div>
-            {/* Modified heading to be cleaner and slightly less thick, using text-gray-900 instead of dark slate */}
+
             <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-3">
               {product.name}
             </h1>
@@ -226,7 +304,7 @@ export default function Page({ params }) {
           </div>
 
           {/* RATINGS */}
-          <div className="flex items-center gap-3 bg-white w-fit px-4 py-2 rounded-full border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition" onClick={() => document.getElementById('reviews').scrollIntoView({behavior: 'smooth'})}>
+          <div className="flex items-center gap-3 bg-white w-fit px-4 py-2 rounded-full border border-gray-100 shadow-sm cursor-pointer hover:bg-gray-50 transition" onClick={() => document.getElementById('reviews').scrollIntoView({ behavior: 'smooth' })}>
             <div className="flex gap-1">
               {renderStars(product.rating)}
             </div>
@@ -235,11 +313,11 @@ export default function Page({ params }) {
           </div>
 
           <hr className="border-gray-100" />
-
           {/* PRICING */}
+
           <div>
             <div className="flex items-end gap-4 mb-2">
-              <span className="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
+              <span className="text-4xl lg:text-4xl font-bold text-gray-900 tracking-tight">
                 ₹{product.price.toLocaleString()}
               </span>
               {product.oldPrice && (
@@ -249,12 +327,12 @@ export default function Page({ params }) {
               )}
             </div>
             <p className="text-sm text-green-600 font-medium flex items-center gap-1">
-              <FaCheckCircle /> Inclusive of all taxes (GST {product.gst}%)
+              <FaCheckCircle className=" text-green-600" /> Inclusive of all taxes (GST {product.gst}%)
             </p>
           </div>
 
           {/* COLORS */}
-          {product.images && product.images.length > 0 && (
+          {/* {product.images && product.images.length > 0 && (
             <div>
               <div className="flex justify-between items-end mb-3">
                 <h3 className="text-gray-900 font-semibold">Select Color</h3>
@@ -280,7 +358,7 @@ export default function Page({ params }) {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
 
           {/* QUANTITY */}
           <div>
@@ -289,23 +367,23 @@ export default function Page({ params }) {
               <div className="flex items-center border-2 border-gray-100 rounded-xl bg-white overflow-hidden shadow-sm hover:border-gray-200 transition">
                 <button
                   onClick={() => setQty(qty > 1 ? qty - 1 : 1)}
-                  className="px-5 py-3 text-gray-400 hover:text-primary-blue hover:bg-blue-50 transition-colors text-lg font-medium"
+                  className="px-3 py-2 text-gray-400 hover:text-primary-blue hover:bg-blue-50 transition-colors text-lg font-medium"
                 >
                   −
                 </button>
-                <span className="w-12 text-center font-bold text-gray-900 text-lg">
+                <span className="w-4 text-center font-bold text-gray-900 text-lg">
                   {qty}
                 </span>
                 <button
                   onClick={() => setQty(qty < product.stock ? qty + 1 : product.stock)}
-                  className="px-5 py-3 text-gray-400 hover:text-primary-blue hover:bg-blue-50 transition-colors text-lg font-medium"
+                  className="px-3 py-2 text-gray-400 hover:text-primary-blue hover:bg-blue-50 transition-colors text-lg font-medium"
                 >
                   +
                 </button>
               </div>
               {product.stock < 20 && (
-                <span className="text-sm text-red-500 font-medium bg-red-50 px-3 py-1.5 rounded-lg flex items-center gap-1">
-                   Hurry! Only {product.stock} left
+                <span className="text-sm text-primary-red font-medium bg-red-50 px-3 py-1.5 rounded-lg flex items-center gap-1">
+                  Hurry! Only {product.stock} left
                 </span>
               )}
             </div>
@@ -313,10 +391,10 @@ export default function Page({ params }) {
 
           {/* ACTIONS */}
           <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <button className="flex-1 bg-white border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white py-4 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
+            <button className=" bg-white border-2 border-primary-red text-primary-red hover:bg-primary-blue hover:scale-[1.02] hover:border-primary-blue hover:text-white py-3 px-6 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
               <FaShoppingCart /> Add to Cart
             </button>
-            <button className="flex-1 bg-gradient-to-r from-blue-600 to-primary-blue text-white hover:from-blue-700 hover:to-blue-800 py-4 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:scale-[1.02]">
+            <button className="bg-gradient-blue-red  text-white py-3 px-6 rounded-2xl font-bold text-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-lg  hover:shadow-xl hover:scale-[1.02]">
               <FaBolt /> Buy It Now
             </button>
           </div>
@@ -345,10 +423,10 @@ export default function Page({ params }) {
 
           {/* ACCORDION TABS */}
           <div className="mt-4 flex flex-col gap-3">
-            
+
             {/* Description Tab */}
             <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
-              <button 
+              <button
                 onClick={() => setActiveTab(activeTab === "description" ? "" : "description")}
                 className="w-full flex justify-between items-center p-5 font-bold text-gray-900 hover:bg-gray-50 transition-colors"
               >
@@ -364,7 +442,7 @@ export default function Page({ params }) {
 
             {/* Specifications Tab */}
             <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
-              <button 
+              <button
                 onClick={() => setActiveTab(activeTab === "specs" ? "" : "specs")}
                 className="w-full flex justify-between items-center p-5 font-bold text-gray-900 hover:bg-gray-50 transition-colors"
               >
@@ -385,7 +463,7 @@ export default function Page({ params }) {
 
             {/* Offers Tab */}
             <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
-              <button 
+              <button
                 onClick={() => setActiveTab(activeTab === "offers" ? "" : "offers")}
                 className="w-full flex justify-between items-center p-5 font-bold text-gray-900 hover:bg-gray-50 transition-colors"
               >
@@ -412,33 +490,130 @@ export default function Page({ params }) {
         </div>
       </div>
 
-      {/* CUSTOMER REVIEWS SECTION */}
-      <div id="reviews" className="max-w-[1400px] mx-auto px-4 lg:px-10 py-16">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">Customer Reviews</h2>
-          <button className="text-primary-blue font-semibold hover:underline">Write a Review</button>
-        </div>
+
+      {/*Other info  */}
+     <div>
+  <div className="max-w-[1400px] mx-auto px-4 lg:px-10 pt-12">
+
+    
+    <div className="relative mb-8">
+      <h1 className="text-2xl font-bold text-[#0f172a]">
+        Other Information
+      </h1>
+
+      <span className="absolute left-0 top-9 w-40 h-[2px] bg-gradient-blue-red rounded-full"></span>
+    </div>
+
+    
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+
+      {product.otherinfo?.map((info, index) => (
+        <div
+          key={index}
+          className="grid grid-cols-3 px-6 py-4 border-b border-gray-100 last:border-0"
+        >
+
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          
-          {/* Review Summary */}
-          <div className="lg:col-span-4 h-fit bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center">
-            <span className="text-6xl font-bold text-gray-900">{product.rating}</span>
-            <div className="flex text-yellow-400 text-2xl my-4 gap-1">
+          <p className="text-gray-500 font-medium">
+            {info.key}
+          </p>
+
+        
+          <p className="text-[#0f172a] font-semibold ">
+            {info.value}
+          </p>
+
+        </div>
+      ))}
+
+    </div>
+
+  </div>
+</div>
+
+      {/* faq */}
+      <div>
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-10 py-10">
+
+          <div className="relative">
+            <h1 className="text-3xl font-bold">
+              Frequently Asked Question
+            </h1>
+
+            <span className="absolute left-4 top-11 w-[300px] h-[2px] bg-gradient-blue-red rounded-full"></span>
+          </div>
+
+          <div className="flex flex-col   gap-3 mt-12">
+
+            {product.quesAns?.map((ques, i) => (
+              <div
+                key={i}
+                className="rounded-2xl bg-white overflow-hidden shadow-sm hover:shadow-md transition"
+              >
+
+                <button
+                  onClick={() =>
+                    setActiveIndex(activeIndex === i ? null : i)
+                  }
+                  className="w-full flex justify-between items-center p-5 font-bold text-gray-500"
+                >
+                  {ques.key}
+
+                  {activeIndex === i ? (
+                    <FaChevronUp />
+                  ) : (
+                    <FaChevronDown />
+                  )}
+                </button>
+
+                <div
+                  className={`px-5 overflow-hidden transition-all duration-300 ${activeIndex === i
+                      ? "max-h-96 pb-5 opacity-100"
+                      : "max-h-0 opacity-0"
+                    }`}
+                >
+                  <div className="mt-2">
+                    <p className="text-gray-700">{ques.value}</p>
+                  </div>
+                </div>
+
+              </div>
+            ))}
+
+          </div>
+        </div>
+      </div>
+
+  
+
+      {/* CUSTOMER REVIEWS SECTION */}
+      <div id="reviews" className="max-w-[1400px] mx-auto px-4 lg:px-10 py-12">
+        <div className="relative flex items-center justify-between mb-8">
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">Customer Reviews</h2>
+     
+          <span className="absolute left-4 top-10 w-[200] h-[2px]  bg-gradient-blue-red rounded-full"></span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-[60px]">
+
+
+          <div className="lg:col-span-4 h-fit bg-white p-8 rounded-3xl border  border-gray-200 shadow-sm flex flex-col items-center justify-center text-center">
+            <span className="text-5xl font-bold text-gray-900">{product.rating}</span>
+            <div className="flex text-yellow-400 text-l my-2 gap-1">
               {renderStars(product.rating)}
             </div>
-            <span className="text-gray-500 font-medium mb-6">Based on {product.ratingCount} reviews</span>
-            
-            {/* Rating Bars */}
-            <div className="w-full flex flex-col gap-3">
+            <span className="text-gray-500 text-sm font-medium mb-4">Based on {product.ratingCount} reviews</span>
+
+
+            <div className="w-full flex flex-col gap-2">
               {[5, 4, 3, 2, 1].map((star) => (
-                <div key={star} className="flex items-center gap-3 text-sm">
+                <div key={star} className="flex items-center gap-2 text-sm">
                   <span className="text-gray-600 font-medium w-3">{star}</span>
                   <FaStar className="text-yellow-400 w-4" />
                   <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-yellow-400 rounded-full" 
-                      style={{ width: `${star === 5 ? 75 : star === 4 ? 20 : star === 3 ? 5 : 0}%` }}
+                    <div
+                      className="h-full bg-yellow-400 rounded-full"
+                      style={{ width: `${star === 5 ? 70 : star === 4 ? 20 : star === 3 ? 6 : 0}%` }}
                     ></div>
                   </div>
                 </div>
@@ -446,35 +621,39 @@ export default function Page({ params }) {
             </div>
           </div>
 
-          {/* Individual Reviews */}
+
           <div className="lg:col-span-8 flex flex-col gap-6">
-            
-            <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+
+            <div className="bg-white px-6 py-3 rounded-3xl border border-gray-100 shadow-sm">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-primary-blue text-xl font-bold">
                     JD
                   </div>
+
                   <div>
+
                     <h4 className="font-bold text-gray-900 text-base">John Doe</h4>
+
                     <p className="text-xs text-green-600 font-medium flex items-center gap-1 mt-0.5">
-                      <FaCheckCircle /> Verified Buyer
+                      <FaCheckCircle /> Verified
                     </p>
+                    <div className="flex text-yellow-400 text-sm gap-1 mb-1 mt-2 justify-end">
+                      <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                    </div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="flex text-yellow-400 text-sm gap-0.5 mb-1 justify-end">
-                    <FaStar/><FaStar/><FaStar/><FaStar/><FaStar/>
-                  </div>
-                  <span className="text-xs text-gray-400">2 days ago</span>
+
+                  {/* <span className="text-xs text-gray-400">2 days ago</span> */}
                 </div>
               </div>
-              <h5 className="font-bold text-gray-900 mb-2">Exceeded my expectations!</h5>
+              <h5 className="font-bold text-gray-900 mb-1 !mt-0">Exceeded my expectations!</h5>
               <p className="text-gray-600 leading-relaxed">
-                "Absolutely love this product! The quality is amazing and it looks exactly like the pictures. The battery life is phenomenal. Highly recommend to everyone who is looking for a premium experience without breaking the bank."
+                "Absolutely love this product! The quality is amazing and it looks exactly like the pictures. The battery life is phenomenal.  "
               </p>
             </div>
-
+            {/* 
             <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-4">
@@ -499,15 +678,68 @@ export default function Page({ params }) {
               <p className="text-gray-600 leading-relaxed">
                 "Good value for money. Delivery was exceptionally fast and the packaging was excellent. The only minor issue is that the strap could be a bit more comfortable, but overall a solid 4 stars. Will definitely buy again."
               </p>
-            </div>
+            </div> */}
 
-            <button className="w-full py-4 border-2 border-gray-200 text-gray-600 font-bold rounded-2xl hover:bg-gray-50 transition-colors">
+            <div className="bg-white px-6 py-3 rounded-3xl border border-gray-100 shadow-sm">
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-primary-blue text-xl font-bold">
+                    JD
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-gray-900 text-base">John Doe</h4>
+                    <p className="text-xs text-green-600 font-medium flex items-center gap-1 mt-0.5">
+                      <FaCheckCircle /> Verified
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="flex text-yellow-400 text-sm gap-0.5 mb-1 justify-end">
+                    <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                  </div>
+                  {/* <span className="text-xs text-gray-400">2 days ago</span> */}
+                </div>
+              </div>
+              <h5 className="font-bold text-gray-900 mb-1 !mt-0">Exceeded my expectations!</h5>
+              <p className="text-gray-600 leading-relaxed">
+                "Absolutely love this product! The quality is amazing and it looks exactly like the pictures. The battery life is phenomenal.  "
+              </p>
+            </div>
+            {/* <button className="w-full py-4 border-2 border-gray-200 text-gray-600 font-bold rounded-2xl hover:bg-gray-50 transition-colors">
               Load More Reviews
-            </button>
+            </button> */}
 
           </div>
         </div>
       </div>
+
+      {/* similiar product */}
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-10 py-12">
+        <div className="flex items-center justify-between mb-10">
+
+          <div className="ps-3 relative">
+
+
+            <h2 className="text-2xl md:text-3xl font-bold text-[#0f172a]">
+              Similiar Products
+            </h2>
+            <span className="absolute left-5 top-10 w-[200] h-[2px]  bg-gradient-blue-red rounded-full"></span>
+          </div>
+
+          <div className="flex me-6 items-center gap-1 text-primary-blue hover:underline cursor-pointer">
+            <button className="text-md font-bold">
+              View All
+            </button>
+            <FaArrowRight />
+          </div>
+
+        </div>
+
+        <div className="flex justify-center items-center">
+          <ProductSlider products={products} />
+        </div>
+
+      </div>
     </div>
   );
-}
+}
