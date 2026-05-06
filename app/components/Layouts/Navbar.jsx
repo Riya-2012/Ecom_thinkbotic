@@ -14,7 +14,7 @@ function Navbar() {
   return (
     <div>
 
-      {/* TOP BAR (HIDE ON MOBILE) */}
+  
       <div className="hidden md:flex border-b px-6 py-1 justify-between bg-gradient-blue-red text-white text-sm">
 
         <div className="flex">
@@ -67,8 +67,8 @@ function Navbar() {
 
             {/* CART */}
             <div className="relative cursor-pointer">
-              <RiShoppingCart2Line size={24} />
-              <span className="absolute -top-2 -right-2 bg-primary-blue text-white text-[10px] px-1.5 rounded-full">
+            <Link href="/cart" >   <RiShoppingCart2Line size={24} /> </Link>
+              <span className="absolute -top-2 -right-2 bg-primary-blue text-white text-[10px] px-1.5 rounded-full"> 
                 0
               </span>
             </div>

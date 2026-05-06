@@ -95,7 +95,7 @@ export default function SigninPage() {
           <div className="text-center mb-8">
 
             <h2 className="text-3xl font-bold text-primary-blue">
-              Sign in to your account
+              Sign In 
             </h2>
 
             <p className="text-gray-500 mt-3">
@@ -118,10 +118,10 @@ export default function SigninPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder=" "
-                  className="peer w-full px-4 pt-6 pb-2 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
+                  className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
                 />
 
-                <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm">
+                <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm">
                   Phone Number
                 </label>
 
@@ -130,13 +130,13 @@ export default function SigninPage() {
 
    
 
-            {/* PASSWORD */}
+           
           
             {/* BUTTON */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 rounded-2xl bg-gradient-blue-red text-white font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
+              className="w-full py-2 rounded-2xl bg-gradient-blue-red text-white font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
             >
               {loading ? "Creating Account..." : "Sign In"}
             </button>
@@ -144,12 +144,12 @@ export default function SigninPage() {
           </form>
 
           {/* LOGIN */}
-          <div className="mt-8 text-center">
+          <div className="mt-6 text-center">
             <p className="text-gray-500 text-sm">
-              New User{" "}
+              New User ?{" "}
 
               <Link
-                href="/login"
+                href="/signup"
                 className="text-primary-red font-bold hover:text-primary-blue transition"
               >
                 Signup
