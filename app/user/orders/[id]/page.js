@@ -245,6 +245,7 @@ export default function Page() {
 
           <h3 className="font-bold text-[#0f172a]">
             Shipped
+
           </h3>
 
           <p className="text-sm text-gray-500 mt-1">
@@ -259,13 +260,8 @@ export default function Page() {
       <div className="relative flex gap-5">
 
         <div className="relative z-10 w-4 h-4 rounded-full bg-gradient-blue-red text-white flex items-center justify-center shrink-0">
-
-          
-
         </div>
-
         <div>
-
           <h3 className="font-bold text-[#0f172a]">
             Out For Delivery
           </h3>
@@ -282,21 +278,14 @@ export default function Page() {
       <div className="relative flex gap-5 ">
 
         <div className="relative z-10 w-4 h-4 rounded-full bg-gradient-blue-red flex items-center justify-center shrink-0">
-
-          
-
         </div>
-
         <div>
-
           <h3 className="font-bold text-[#0f172a]">
             Delivered
           </h3>
-
           {/* <p className="text-sm text-gray-500 mt-1">
             Pending
           </p> */}
-
         </div>
 
       </div>
@@ -318,27 +307,21 @@ export default function Page() {
 
          
           <div className=" bg-white border border-gray-100 shadow-sm p-6">
-
             <h2 className="text-lg font-bold text-primary-blue mb-2">
               Delivery Address
             </h2>
-
             <div className="space-y-1">
-
               <h3 className="font-semibold text-lg text-[#0f172a]">
                 {order.shipping.name}
-              </h3>
+              </h3> 
 
               <p className="text-gray-600">
                 {order.shipping.mobile}
               </p>
-
               <p className="text-gray-600 leading-relaxed">
                 {order.shipping.address}
               </p>
-
             </div>
-
           </div>
 
         
@@ -349,10 +332,8 @@ export default function Page() {
             </h2>
 
             <div className="space-y-5">
-
              
               <div className="flex justify-between text-gray-600">
-
                 <span>Subtotal</span>
 
                 <span>

@@ -50,6 +50,11 @@ const links = [
     href: "/cart",
     icon: <FaShoppingCart />,
   },
+   {
+    name: "Reviews and Rating",
+    href: "/user/reviews",
+    icon: <FaShoppingCart />,
+  },
 ];
 
 export default function ProfileDashboard() {
@@ -137,6 +142,9 @@ export default function ProfileDashboard() {
             );
           })}
 
+
+  
+
     <button className="   mt-6 flex items-center justify-center gap-3 px-4 py-3 rounded-2xl bg-gradient-blue-red text-white font-semibold hover:bg-red-50 transition">
 
           <FaSignOutAlt />
@@ -144,7 +152,9 @@ export default function ProfileDashboard() {
           Logout
 
         </button>
+
         </div>
+
 
         {/* LOGOUT */}
     
