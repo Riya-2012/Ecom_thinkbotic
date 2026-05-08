@@ -5,16 +5,16 @@ import Image from "next/image";
 import { IoLocationSharp } from "react-icons/io5";
 function Footer() {
   return (
-    <div className="mt-10 border-t" >
+    <div className=" shadow-2xl" >
 
       {/* MAIN FOOTER */}
       <div className="px-6 lg:px-12 py-12 shadow-md text-white"> 
 
         {/* GRID */}
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="max-w-[1400px] mx-auto  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
           
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 md:col-span-3">
 
             <Image src="/Logo.png" height={200} width={200} alt="logo" style={{ width: "auto", height: "auto" }} />
 
@@ -32,8 +32,10 @@ function Footer() {
       
           </div>
 
-          {/* QUICK LINKS */}
-          <div>
+     
+
+           {/* QUICK LINKS */}
+          <div >
             <h2 className="font-semibold text-lg text-primary-red mb-4">
               Quick Links
             </h2>
@@ -86,6 +88,7 @@ function Footer() {
 
             </div>
           </div>
+      
 
         </div>
       </div>

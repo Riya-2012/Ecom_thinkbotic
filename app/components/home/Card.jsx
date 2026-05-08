@@ -23,7 +23,7 @@ export default function ProductCard({
       `}
     >
 
-      <div className="relative w-full h-[220px] overflow-hidden">
+      <div className="relative w-full h-[140px] lg:h-[220px] md:h-[200px] overflow-hidden">
 
         <Image
           src={image}

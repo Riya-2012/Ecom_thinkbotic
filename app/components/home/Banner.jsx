@@ -57,7 +57,7 @@ export default function Banner() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="min-h-[420px] flex flex-col md:flex-row lg:flex-col gap-6">
+        <div className="min-h-[420px] md:min-h-[300px]  flex flex-col md:flex-row lg:flex-col gap-6">
 
           {/* TOP CARD */}
           <div className="relative flex-1 rounded-3xl overflow-hidden">
@@ -87,7 +87,7 @@ export default function Banner() {
           </div>
 
           {/* BOTTOM CARD */}
-          <div className="flex-1 relative rounded-3xl overflow-hidden group cursor-pointer">
+          {/* <div className="flex-1 relative rounded-3xl overflow-hidden group cursor-pointer">
 
             <div className="absolute inset-0 bg-gradient-to-r from-primary-blue/10 to-primary-red/10"></div>
 
@@ -123,6 +123,31 @@ export default function Banner() {
                 />
               </div>
 
+            </div>
+          </div> */}
+          <div className="relative flex-1 rounded-3xl overflow-hidden">
+            <Image
+              src="/product-1.jpg"
+              alt="headphone"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover"
+            />
+
+            <div className="absolute inset-0 bg-black/40"></div>
+
+            <div className="absolute bottom-6 left-6 text-white">
+              <p className="text-xs opacity-80"> Hot Deal</p>
+
+              <h2 className="text-lg sm:text-xl font-semibold">
+             VR Headset
+              </h2>
+
+              <p className="text-sm mt-1">Starting ₹999</p>
+
+              <button className="mt-3 bg-white text-primary-blue px-4 py-2 rounded-full text-sm font-medium hover:bg-primary-blue hover:text-white transition">
+                Shop Now
+              </button>
             </div>
           </div>
 

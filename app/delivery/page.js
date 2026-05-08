@@ -480,7 +480,7 @@ export default function CheckoutPage() {
                     </div>
 
                     {/* STEP 2: PAYMENT */}
-                    <div className={`bg-white rounded-2xl shadow-sm border transition-all duration-300 ${step === 2 ? 'border-primary-blue/30 shadow-md ring-4 ring-primary-blue/5' : 'border-gray-100 opacity-70 pointer-events-none'}`}>
+                    {/* <div className={`bg-white rounded-2xl shadow-sm border transition-all duration-300 ${step === 2 ? 'border-primary-blue/30 shadow-md ring-4 ring-primary-blue/5' : 'border-gray-100 opacity-70 pointer-events-none'}`}>
                         <div className="p-5 sm:p-6 flex justify-between items-center border-b border-gray-50">
                             <div className="flex items-center gap-4">
                                 <span className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-bold transition-colors ${step === 2 ? 'bg-primary-blue text-white shadow-md shadow-primary-blue/20' : 'bg-gray-100 text-gray-400'}`}>2</span>
@@ -491,7 +491,7 @@ export default function CheckoutPage() {
                         {step === 2 && (
                             <div className="p-5 sm:p-8 transition-opacity duration-500 opacity-100">
                                 <div className="flex flex-col md:flex-row gap-8">
-                                    {/* Payment Sidebar */}
+                                   
                                     <div className="md:w-[220px] flex-shrink-0 flex flex-col gap-2">
                                         <PaymentTab id="card" icon={<FaRegCreditCard />} label="Credit / Debit Card" selected={selectedPayment} onSelect={setSelectedPayment} />
                                         <PaymentTab id="upi" icon={<FaMobileAlt />} label="UPI" selected={selectedPayment} onSelect={setSelectedPayment} />
@@ -499,7 +499,7 @@ export default function CheckoutPage() {
                                         <PaymentTab id="cod" icon={<FaMoneyBillAlt />} label="Cash on Delivery" selected={selectedPayment} onSelect={setSelectedPayment} />
                                     </div>
                                     
-                                    {/* Payment Details */}
+                                   
                                     <div className="flex-grow md:border-l border-gray-100 md:pl-8 min-h-[300px]">
                                         {selectedPayment === 'card' && <CardPaymentForm />}
                                         {selectedPayment === 'upi' && <UPIPaymentForm />}
@@ -509,26 +509,25 @@ export default function CheckoutPage() {
                                 </div>
                             </div>
                         )}
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* RIGHT SIDE: ORDER SUMMARY */}
-                <div className="lg:col-span-1">
+                {/* <div className="lg:col-span-1">
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-28">
                         <h2 className="text-lg font-bold text-gray-800 mb-5 pb-4 border-b border-gray-100 flex justify-between items-center">
                             Order Summary
                             <span className="text-sm font-medium text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">{cart.length} Items</span>
                         </h2>
                         
-                        {/* Cart Items Summary */}
+                        
                         <div className="space-y-4 mb-6 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
                             {cart.map(item => (
                                 <div key={item.id} className="flex gap-4 group">
                                     <div className="w-16 h-16 bg-gray-50 rounded-xl border border-gray-100 relative overflow-hidden flex-shrink-0">
-                                        {/* Image placeholder for actual images */}
+                                      
                                         <div className="w-full h-full bg-gray-200"></div>
-                                        {/* Uncomment below if images are present */}
-                                        {/* <Image src={item.image} alt={item.title} fill className="object-cover group-hover:scale-110 transition duration-500" /> */}
+                                       
                                     </div>
                                     <div className="flex-grow flex flex-col justify-center">
                                         <h4 className="text-sm font-semibold text-gray-800 line-clamp-2 leading-snug mb-1">{item.title}</h4>
@@ -541,7 +540,7 @@ export default function CheckoutPage() {
                             ))}
                         </div>
 
-                        {/* Price Details */}
+                 
                         <div className="space-y-3.5 text-sm text-gray-600 border-t border-gray-100 pt-5">
                             <div className="flex justify-between items-center">
                                 <span>Subtotal</span>
@@ -586,7 +585,75 @@ export default function CheckoutPage() {
                             <p>100% Authentic products.</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
+
+                  <div className=" p-2 rounded-2xl   h-fit sticky top-24">
+
+    <h2 className="text-xl font-bold mb-4">
+      Order Summary
+    </h2>
+
+   
+    {(() => {
+      const subtotal = cart.reduce(
+        (acc, item) => acc + item.price * (item.qty || 1),
+        0
+      );
+        const oldPriceTotal = cart.reduce(
+        (acc, item) => acc + item.oldPrice * (item.qty || 1),
+        0
+      );
+ 
+      const shipping = 50;
+      const total = subtotal + shipping;
+const discount=oldPriceTotal-subtotal;
+      return (
+        <>
+<div className="flex justify-between text-gray-600 mb-2">
+            <span>Old Price</span>
+            <span>₹{oldPriceTotal}</span>
+          </div>
+
+          <div className="flex justify-between text-gray-600 mb-2">
+            <span>Cart Total</span>
+            <span>₹{subtotal}</span>
+          </div>
+ <div className="flex justify-between text-gray-600 mb-2">
+            <span>Discount</span>
+            <span>₹{discount}</span>
+          </div>
+          <div className="flex justify-between text-gray-600 mb-2">
+            <span>Shipping</span>
+            <span>₹{shipping}</span>
+          </div>
+  <div className="flex justify-between text-gray-600 mb-2">
+            <span>Coupon Discount</span>
+            <span>₹0.0</span>
+          </div>
+            <div className="flex justify-between text-gray-600 mb-2">
+            <span>GST</span>
+            <span>₹899</span>
+          </div>
+            <div className="flex justify-between text-gray-600 mb-2">
+            <span>Shipping charges</span>
+            <span>₹{shipping}</span>
+          </div>
+          <div className="border-t my-3"></div>
+
+          <div className="flex justify-between font-bold text-lg">
+            <span className='text-primary-red'>Total</span>
+            <span className='text-primary-red'>₹{total}</span>
+          </div>
+
+          <button className="w-full mt-6 bg-gradient-blue-red  text-white py-2 rounded-xl font-bold">
+            <Link href="/delivery">Place Order</Link>
+
+          </button>
+        </>
+      );
+    })()}
+
+  </div>
             </div>
         </div>
     );

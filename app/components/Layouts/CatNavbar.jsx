@@ -40,7 +40,7 @@ export default function StickyCategoryNav() {
           : "fixed -top-20 opacity-0"
       }`}
     >
-      <div className="bg-white/90 backdrop-blur-md border-b border-primary-blue shadow-sm">
+      <div className="bg-white/90 backdrop-blur-md  shadow-sm">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
 
           {/* CATEGORY BUTTON */}

@@ -4,6 +4,7 @@ import ProductSlider from "@/app/components/home/Slider";
 import TopRatedProducts from "@/app/components/home/TopRated";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, use } from "react";
 import {
   FaStar, FaStarHalfAlt, FaRegStar,
@@ -197,6 +198,7 @@ export default function Page({ params }) {
   const [qty, setQty] = useState(1);
   const [activeTab, setActiveTab] = useState("description");
 
+  const router=useRouter();
   const handleColorChange = (idx) => {
     setSelectedColorIdx(idx);
     setSelectedImage(product.images[idx].imageSet[0]);
@@ -225,23 +227,23 @@ export default function Page({ params }) {
 
 
         <div className="lg:col-span-6 flex flex-col gap-6 lg:sticky lg:top-24 lg:h-fit ">
-  <div>
+          <div>
             <p className="text-[13px] text-gray-500 mb-[2px] font-medium tracking-wide">
               <Link href="/"> <span className="hover:text-primary-blue cursor-pointer transition">Home</span></Link> / <Link href="/products"><span className="hover:text-primary-blue cursor-pointer transition">Shop</span></Link> / <span className="text-primary-blue font-bold">{product.name}</span>
             </p>
-           
+
           </div>
           {/* MAIN IMAGE */}
-          <div className="relative w-full h-full h-[350px] sm:h-[400px] lg:h-[500px]  bg-white rounded-3xl shadow-sm border border-gray-100 flex items-center justify-center overflow-hidden group">
-            <div className="relative w-[900px] h-[900px] transition-transform duration-500 ease-out group-hover:scale-105">
+          <div className="relative w-full md:w-[700px] lg:w-full h-full h-[350px] md:h-[350px] sm:h-[200px] lg:h-[500px]  bg-white rounded-3xl shadow-sm border border-gray-100 flex items-center justify-center overflow-hidden group md:mx-8 lg:mx-0 ">
+            <div className="relative w-[900px] h-[300px] md:h-[400px] lg:h-[900px]  transition-transform duration-500 ease-out group-hover:scale-105">
               <Image
                 src={selectedImage}
                 fill
                 priority
-                className="object-contain drop-shadow-xl"
+                className="object-cover drop-shadow-xl"
                 alt={product.name}
               // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-               />
+              />
             </div>
 
             {/* Badges */}
@@ -312,7 +314,7 @@ export default function Page({ params }) {
             <span className="text-gray-400 text-sm underline decoration-gray-300 decoration-dotted underline-offset-4">({product.ratingCount} reviews)</span>
           </div>
 
-          <hr className="border-gray-100" />
+         
           {/* PRICING */}
 
           <div>
@@ -365,7 +367,7 @@ export default function Page({ params }) {
             <h3 className="text-gray-900 font-semibold mb-3">Quantity</h3>
             <div className="flex items-center gap-4">
               <div className="flex items-center border-2 border-gray-100 rounded-xl bg-white overflow-hidden shadow-sm hover:border-gray-200 transition">
-                <button
+                <button 
                   onClick={() => setQty(qty > 1 ? qty - 1 : 1)}
                   className="px-3 py-2 text-gray-400 hover:text-primary-blue hover:bg-blue-50 transition-colors text-lg font-medium"
                 >
@@ -398,6 +400,51 @@ export default function Page({ params }) {
               <FaBolt /> Buy It Now
             </button>
           </div>
+
+          {/*  BULK & CUSTOM ORDER */}
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+  {/* BULK ORDER */}
+  <button className="group relative overflow-hidden shadow-sm bg-blue-50 hover:bg-primary-blue rounded-md  p-5 transition-all duration-300 text-left" onClick={()=>{
+    router.push("/productInquiry?type=bulk")
+  }} >
+
+    <div className="relative z-10">
+    <h3 className="font-bold text-primary-blue group-hover:text-white text-lg transition">
+        Bulk Order
+      </h3>
+
+      <p className="text-sm text-gray-600 group-hover:text-white/80 mt-1 transition">
+        Get special pricing on large quantity purchases.
+      </p>
+    </div>
+
+    {/* Glow */}
+    <div className="absolute inset-0 bg-gradient-to-r from-primary-blue to-blue-600 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+
+  </button>
+
+  {/* CUSTOM ORDER */}
+
+  <button className="group relative overflow-hidden shadow-sm  bg-red-50 hover:bg-primary-red rounded-2xl p-5 transition-all duration-300 text-left" onClick={()=>{router.push("/productInquiry?type=custom")}}>
+
+    <div className="relative z-10">
+      <h3 className="font-bold text-primary-red group-hover:text-white text-lg transition">
+        Custom Order
+      </h3>
+
+      <p className="text-sm text-gray-600 group-hover:text-white/80 mt-1 transition">
+        Customize product design, branding, or packaging.
+      </p>
+    </div>
+
+    {/* Glow */}
+    <div className="absolute inset-0 bg-gradient-to-r from-primary-red to-red-500 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+
+  </button>
+
+
+</div>
 
           {/* TRUST BADGES */}
           <div className="grid grid-cols-2 gap-4 mt-4 bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
@@ -452,7 +499,7 @@ export default function Page({ params }) {
               <div className={`px-5 overflow-hidden transition-all duration-300 ${activeTab === "specs" ? "max-h-96 pb-5 opacity-100" : "max-h-0 opacity-0"}`}>
                 <div className="flex flex-col gap-3 mt-2">
                   {product.specifications?.map((spec, i) => (
-                    <div key={i} className="flex justify-between py-3 border-b border-gray-50 last:border-0"> 
+                    <div key={i} className="flex justify-between py-3 border-b border-gray-50 last:border-0">
                       <span className="text-gray-500">{spec.key}</span>
                       <span className="font-semibold text-gray-900 text-right">{spec.value}</span>
                     </div>
@@ -463,7 +510,7 @@ export default function Page({ params }) {
 
             {/* Offers Tab */}
             <div className="border border-gray-100 rounded-2xl bg-white overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
-              <button 
+              <button
                 onClick={() => setActiveTab(activeTab === "offers" ? "" : "offers")}
                 className="w-full flex justify-between items-center p-5 font-bold text-gray-900 hover:bg-gray-50 transition-colors"
               >
@@ -492,42 +539,42 @@ export default function Page({ params }) {
 
 
       {/*Other info  */}
-     <div>
-  <div className="max-w-[1400px] mx-auto px-4 lg:px-10 pt-12">
+      <div>
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-10 pt-12">
 
-    
-    <div className="relative mb-8">
-      <h1 className="text-2xl font-bold text-[#0f172a]">
-        Other Information
-      </h1>
 
-      <span className="absolute left-0 top-9 w-40 h-[2px] bg-gradient-blue-red rounded-full"></span>
-    </div>
+          <div className="relative mb-8">
+            <h1 className="text-2xl font-bold text-[#0f172a]">
+              Other Information
+            </h1>
 
-    
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <span className="absolute left-0 top-9 w-40 h-[2px] bg-gradient-blue-red rounded-full"></span>
+          </div>
 
-      {product.otherinfo?.map((info, index) => (
-        <div
-          key={index}
-          className="grid grid-cols-3 px-6 py-4 border-b border-gray-100 last:border-0"
-        >    
-          <p className="text-gray-500 font-medium">
-            {info.key}
-          </p>
 
-        
-          <p className="text-[#0f172a] font-semibold ">
-            {info.value}
-          </p>
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+
+            {product.otherinfo?.map((info, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-2 lg:grid-col-3 px-6 py-4 border-b border-gray-100 last:border-0"
+              >
+                <p className="text-gray-500 font-medium">
+                  {info.key}
+                </p>
+
+
+                <p className="text-[#0f172a] font-semibold ">
+                  {info.value}
+                </p>
+
+              </div>
+            ))}
+
+          </div>
 
         </div>
-      ))}
-
-    </div>
-
-  </div>
-</div>
+      </div>
 
       {/* faq */}
       <div>
@@ -538,7 +585,7 @@ export default function Page({ params }) {
               Frequently Asked Question
             </h1>
 
-            <span className="absolute left-4 top-11 w-[300px] h-[2px] bg-gradient-blue-red rounded-full"></span>
+            <span className="absolute left-4 top-20 md:top-11 lg:top-11 w-[100px] md:w-[300px] lg:w-[300px] h-[2px] bg-gradient-blue-red rounded-full"></span>
           </div>
 
           <div className="flex flex-col   gap-3 mt-12">
@@ -566,8 +613,8 @@ export default function Page({ params }) {
 
                 <div
                   className={`px-5 overflow-hidden transition-all duration-300 ${activeIndex === i
-                      ? "max-h-96 pb-5 opacity-100"
-                      : "max-h-0 opacity-0"
+                    ? "max-h-96 pb-5 opacity-100"
+                    : "max-h-0 opacity-0"
                     }`}
                 >
                   <div className="mt-2">
@@ -582,20 +629,20 @@ export default function Page({ params }) {
         </div>
       </div>
 
-  
+
 
       {/* CUSTOMER REVIEWS SECTION */}
       <div id="reviews" className="max-w-[1400px] mx-auto px-4 lg:px-10 py-12">
         <div className="relative flex items-center justify-between mb-8">
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">Customer Reviews</h2>
-     
+
           <span className="absolute left-4 top-10 w-[200] h-[2px]  bg-gradient-blue-red rounded-full"></span>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-[60px]">
 
 
-          <div className="lg:col-span-4 h-fit bg-white p-8 rounded-3xl border  border-gray-200 shadow-sm flex flex-col items-center justify-center text-center">
+          <div className="lg:col-span-4 h-fit bg-white p-8 rounded-3xl border  border-gray-200 shadow-sm flex flex-col items-center justify-center text-center md:mx-8 lg:mx-0">
             <span className="text-5xl font-bold text-gray-900">{product.rating}</span>
             <div className="flex text-yellow-400 text-l my-2 gap-1">
               {renderStars(product.rating)}
@@ -700,7 +747,7 @@ export default function Page({ params }) {
               </div>
               <h5 className="font-bold text-gray-900 mb-1 !mt-0">Exceeded my expectations!</h5>
               <p className="text-gray-600 leading-relaxed">
-                "Absolutely love this product! The quality is amazing and it looks exactly like the pictures. The battery life is phenomenal.  "
+                "Absolutely love this product! The quality is amazing and it looks exactly like the pictures. The battery life is phenomenal."
               </p>
             </div>
             {/* <button className="w-full py-4 border-2 border-gray-200 text-gray-600 font-bold rounded-2xl hover:bg-gray-50 transition-colors">
@@ -712,7 +759,7 @@ export default function Page({ params }) {
       </div>
 
       {/* similiar product */}
-      <div className="max-w-[1400px] mx-auto px-4 lg:px-10 py-12">
+      <div className="max-w-[1400px] mx-auto px-0  lg:px-10 py-12">
         <div className="flex items-center justify-between mb-10">
 
           <div className="ps-3 relative">

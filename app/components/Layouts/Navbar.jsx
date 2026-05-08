@@ -41,53 +41,72 @@ function Navbar() {
          <Link href="/"> <Image src="/Logo.png" height={140} width={140} alt="logo" style={{ width: "auto", height: "auto" }} /></Link>
 
           {/* DESKTOP SEARCH */}
-          <div className="hidden md:flex w-full max-w-lg mx-6 border border-primary-blue rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-primary-blue transition">
+         {/*  CENTER SEARCH */}
+<div className="hidden md:flex flex-1 justify-center px-4 lg:px-8">
 
-            <input
-              type="text"
-              placeholder="Search products..."
-              className="flex-1 px-4 py-2 outline-none"
-            />
+  <div className="w-full md:max-w-[260px] lg:max-w-lg border border-primary-blue rounded-full overflow-hidden focus-within:ring-2 focus-within:ring-primary-blue transition bg-white">
 
-            <div className="flex items-center justify-center px-6 border-l bg-gradient-blue text-white cursor-pointer">
-              <FaSearch />
-            </div>
+    <div className="flex items-center">
 
-          </div>
+      <input
+        type="text"
+        placeholder="Search products..."
+        className="flex-1 px-3 lg:px-4 py-2 text-sm outline-none"
+      />
 
-          <div className="hidden md:flex items-center gap-5">
+      <button className="flex items-center justify-center px-4 lg:px-6 py-2.5 border-l bg-gradient-blue text-white hover:opacity-90 transition">
+        <FaSearch />
+      </button>
 
-            {/* HEART */}
-            <div className="relative cursor-pointer">
-              <Link href="/whishlist"><CiHeart size={24} /></Link>
-              <span className="absolute -top-2 -right-2 bg-primary-red text-white text-[10px] px-1.5 rounded-full">
-                0
-              </span>
-            </div>
+    </div>
 
-            {/* CART */}
-            <div className="relative cursor-pointer">
-            <Link href="/cart" >   <RiShoppingCart2Line size={24} /> </Link>
-              <span className="absolute -top-2 -right-2 bg-primary-blue text-white text-[10px] px-1.5 rounded-full"> 
-                0
-              </span>
-            </div>
+  </div>
 
-        <Link href="/signup">
-            <button className="px-[15px] py-[10px] bg-primary-red font-bold text-white rounded-full text-sm">
-              Sign Up
-            </button>
-        </Link>
+</div>
 
-           <Link href="/signin">
-            <button className="px-[15px] py-[10px] font-bold bg-primary-blue text-white rounded-full text-sm">
-              Sign In
-            </button>
-           </Link>
+{/*  RIGHT SIDE */}
+<div className="hidden md:flex items-center gap-3 lg:gap-5 shrink-0">
 
-          </div>
+  {/* HEART */}
+  <div className="relative cursor-pointer">
+    <Link href="/whishlist">
+      <CiHeart className="text-[22px] lg:text-[24px]" />
+    </Link>
+
+    <span className="absolute -top-2 -right-2 bg-primary-red text-white text-[10px] px-1.5 rounded-full">
+      0
+    </span>
+  </div>
+
+  {/* CART */}
+  <div className="relative cursor-pointer">
+    <Link href="/cart">
+      <RiShoppingCart2Line className="text-[22px] lg:text-[24px]" />
+    </Link>
+
+    <span className="absolute -top-2 -right-2 bg-primary-blue text-white text-[10px] px-1.5 rounded-full">
+      0
+    </span>
+  </div>
+
+  {/* SIGNUP */}
+  <Link href="/signup">
+    <button className="px-3 lg:px-[15px] py-2 lg:py-[10px] bg-primary-red font-bold text-white rounded-full text-xs lg:text-sm whitespace-nowrap transition hover:opacity-90">
+      Sign Up
+    </button>
+  </Link>
+
+  {/* SIGNIN */}
+  <Link href="/signin">
+    <button className="px-3 lg:px-[15px] py-2 lg:py-[10px] font-bold bg-primary-blue text-white rounded-full text-xs lg:text-sm whitespace-nowrap transition hover:opacity-90">
+      Sign In
+    </button>
+  </Link>
+
+</div>
 
         
+
           <div className="md:hidden flex items-center gap-4">
 
             <CiHeart size={22} />

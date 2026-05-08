@@ -185,7 +185,7 @@ const visibleRatings = showRatings ? Ratings : Ratings.slice(0, 2);
           </div>
           
           {/* MOBILE FILTER BTN & SORT DROPDOWN */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto mt-2 md:mt-0">
+          <div className="flex sm:flex-row items-stretch sm:items-center  gap-3 w-full md:w-auto mt-2 md:mt-0">
             <button 
               onClick={() => setIsSidebarOpen(true)}
               className="lg:hidden flex-1 flex justify-center items-center gap-2 bg-gray-50 border border-gray-200 text-[#0f172a] px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-100 transition duration-300"
@@ -218,34 +218,41 @@ const visibleRatings = showRatings ? Ratings : Ratings.slice(0, 2);
        
         <div className={`
            fixed lg:sticky 
-            top-[0px] 
-            left-0 
-            h-[calc(100vh-88px)] 
+            top-0
+            left-0
+            h-[calc(100vh-1px)] 
             w-[300px] lg:w-[250px]
-            bg-white lg:bg-transparent 
+             lg:bg-transparent
+             bg-white
             shadow-2xl lg:shadow-none 
             z-50 lg:z-10
             overflow-y-auto 
+            
             no-scrollbar
             transition-transform duration-300
             ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}>
           
-          <div className=" rounded-none mt-0 pt-0 px-0  lg:border border-gray-100  lg:shadow-sm min-h-full lg:min-h-fit">
+          <div className=" rounded-none mt-0 pt-0 px-0   lg:border border-gray-100  lg:shadow-sm min-h-full lg:min-h-fit">
             
             {/* MOBILE CLOSE BTN */}
-            <div className="flex justify-between items-center lg:hidden mb-8 border-b pb-4">
+            <div className="flex justify-between items-center lg:hidden mb-8 border-b pb-2 ps-2">
               <h3 className="font-bold text-xl text-[#0f172a]">Filters</h3>
-              <button onClick={() => setIsSidebarOpen(false)} className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition">
+              <button onClick={() => setIsSidebarOpen(false)} className="p-1 m-2 bg-gradient-blue-red text-white  rounded-full hover:bg-gray-200 transition">
                 <MdOutlineClose size={20} />
               </button>
             </div>
 
             {/* CATEGORIES */}
      <div className="mb-4  bg-white p-6" >
-  <h4 className="font-semibold text-lg  mb-4">
+      
+<div className="flex justify-between">
+    <h4 className="font-semibold text-lg  mb-4">
     Categories
   </h4>
+    
+</div>
+  
 
   <ul className="space-y-4 ">
 
@@ -555,7 +562,7 @@ const visibleRatings = showRatings ? Ratings : Ratings.slice(0, 2);
      
  <div className="flex-1 px-4 lg:px-10 mt-8">
           {sortedProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            <div className="grid  lg:grid-col-3 grid-cols-2 xl:grid-cols-4 gap-2 lg:gap-6">
               {sortedProducts.map((item, index) => (
                 <ProductCard key={index} {...item} />
               ))}

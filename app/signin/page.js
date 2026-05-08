@@ -3,24 +3,21 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 export default function SigninPage() {
   const [formData, setFormData] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    gender: "",
-    email: "",
+   
     phone: "",
-    password: "",
+    otp:"",
+   
   });
 
 
   const [loading, setLoading] = useState(false);
 
-  // HANDLE INPUT
+  
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -28,7 +25,7 @@ export default function SigninPage() {
     });
   };
 
-  // SUBMIT
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -41,23 +38,23 @@ export default function SigninPage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#f8fafc] overflow-hidden">
+    <div className="min-h-screen flex bg-gradient-blue-red overflow-hidden">
 
       {/*LEFT SIDE */}
-      <div className="relative hidden lg:flex lg:w-1/2 overflow-hidden bg-gradient-blue-red items-center justify-center">
+      <div className="relative hidden lg:flex lg:w-1/2 overflow-hidden  items-center justify-center">
 
         {/* OVERLAY */}
-        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute inset-0 "></div>
 
         {/* GLOW */}
         <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-white/10 rounded-full blur-3xl"></div>
 
-        <div className="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] bg-white/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-[-120px] right-[-120px] w-[350px] h-[350px] rounded-full blur-3xl"></div>
 
         {/* CONTENT */}
         <div className="relative z-10 flex flex-col items-center justify-center px-10 mt-5 text-center">
 
-          <h1 className="text-5xl font-bold  text-white tracking-tight">
+          <h1 className="text-4xl font-bold  text-white tracking-tight">
             Thinkbotic
           </h1>
 
@@ -67,10 +64,10 @@ export default function SigninPage() {
           </p>
 
           {/* IMAGE */}
-          <div className="relative w-[500px] h-[500px] mt-6 animate-pulse">
+          <div className="relative w-[500px] h-[500px] mt-6 ">
 
             <DotLottieReact
-      src="/e-comerce.lottie"
+      src="/ecomm_cart.lottie"
       loop
       autoplay
       
@@ -83,22 +80,22 @@ export default function SigninPage() {
       {/* RIGHT SIDE */}
       <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-10 relative">
 
-        {/* BACKGROUND GLOW */}
-        <div className="absolute top-10 right-10 w-40 h-40 bg-primary-blue/10 rounded-full blur-3xl"></div>
+      
+        <div className="absolute top-10 right-10 w-40 h-40  rounded-full blur-3xl"></div>
 
-        <div className="absolute bottom-10 left-10 w-52 h-52 bg-primary-red/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-10 left-10 w-52 h-52  rounded-full blur-3xl"></div>
 
         {/* FORM CARD */}
-        <div className="relative z-10 w-full max-w-2xl bg-white/90 backdrop-blur-xl border border-white rounded-3xl shadow-2xl p-8 transition-all duration-500 hover:-translate-y-1">
+        <div className="relative z-10 w-full max-w-2xl  backdrop-blur-xl  rounded-3xl p-8 transition-all duration-500 hover:-translate-y-1"  style={{boxShadow : "rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px"}}>
 
           {/* HEADER */}
           <div className="text-center mb-8">
 
-            <h2 className="text-3xl font-bold text-primary-blue">
-              Sign In 
+            <h2 className="text-4xl font-bold text-white">
+Login
             </h2>
 
-            <p className="text-gray-500 mt-3">
+            <p className="text-white mt-3">
               Join us and start your premium journey today.
             </p>
 
@@ -107,36 +104,84 @@ export default function SigninPage() {
           {/* FORM */}
           <form onSubmit={handleSubmit} className="space-y-5">
 
-        
-
-              <div className="relative">
-
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder=" "
-                  className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
-                />
-
-                <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm">
-                  Phone Number
-                </label>
-
-              </div>
-        
-
-   
-
-           
+            {/* USERNAME */}
           
+
+       
+            {/* EMAIL */}
+            <div className="relative">
+
+              <input
+                type="phone"
+                name="phone"
+                required
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder=" "
+                className="peer w-full px-4 pt-5 pb-2 border border-gray-200 rounded-md bg-gray-50 focus:bg-white focus:border-primary-blue focus:ring-4 focus:ring-primary-blue/10 outline-none transition-all"
+              />
+
+              <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-sm">
+                Phone Number
+
+              </label>
+
+            </div>
+
+            {/* PASSWORD */}
+            {/* <div className="relative">
+
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                required
+                value={formData.password}
+                onChange={handleChange}
+                placeholder=" "
+                className="peer w-full px-4 pt-6 pb-2 border border-gray-200 rounded-2xl bg-gray-50 focus:bg-white focus:border-primary-red focus:ring-4 focus:ring-primary-red/10 outline-none transition-all"
+              />
+
+              <label className="absolute left-4 top-2 text-sm text-gray-500 transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-2 peer-focus:text-sm">
+                Password
+              </label>
+
+            
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary-blue transition"
+              >
+                {showPassword ? (
+                  <FaEyeSlash size={18} />
+                ) : (
+                  <FaEye size={18} />
+                )}
+              </button>
+
+            </div> */}
+
+            {/* TERMS */}
+            {/* <div className="flex items-center gap-2 text-sm text-gray-500">
+
+              <input
+                type="checkbox"
+                className="accent-primary-blue w-4 h-4"
+              />
+
+              <p>
+                I agree to the{" "}
+                <span className="text-primary-blue cursor-pointer">
+                  Terms & Conditions
+                </span>
+              </p>
+
+            </div> */}
+
             {/* BUTTON */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2 rounded-2xl bg-gradient-blue-red text-white font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
+              className="w-full py-2 rounded-md bg-gradient-blue text-white font-bold text-lg shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all duration-300"
             >
               {loading ? "Creating Account..." : "Sign In"}
             </button>
@@ -145,12 +190,12 @@ export default function SigninPage() {
 
           {/* LOGIN */}
           <div className="mt-6 text-center">
-            <p className="text-gray-500 text-sm">
-              New User ?{" "}
+            <p className="text-white text-sm">
+              Not an account?{" "}
 
               <Link
                 href="/signup"
-                className="text-primary-red font-bold hover:text-primary-blue transition"
+                className="text-primary-blue font-bold hover:text-primary-blue transition"
               >
                 Signup
               </Link>
