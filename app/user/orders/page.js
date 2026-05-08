@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   FaBoxOpen,
@@ -50,8 +51,6 @@ export default function Page() {
 
   return (
     <div className="space-y-8">
-
-
       
       <div className="flex flex-col gap-6 mt-6">
 
@@ -61,17 +60,11 @@ export default function Page() {
             key={index}
             className=" shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition"
           >
-
-            {/* TOP */}
-          
-
-            {/* BODY */}
             <div className="p-2 flex flex-col xl:flex-row gap-6 xl:items-center xl:justify-between">
 
-              {/* LEFT SIDE */}
+           
               <div className="flex flex-col sm:flex-row gap-5">
 
-                {/* IMAGE */}
                 <div className="w-full sm:w-[130px] h-[120px]  overflow-hidden border border-gray-100 bg-gray-50 shrink-0">
 
                   <Image
@@ -84,7 +77,6 @@ export default function Page() {
 
                 </div>
 
-                {/* INFO */}
                 <div>
 
                   <p className="text-sm text-primary-blue font-medium">
@@ -134,16 +126,12 @@ export default function Page() {
 
               </div>
 
-              {/* ACTIONS */}
-              <div className="me-8">
-
-                
-
-                <button className="px-4 py-2 bg-gradient-blue-red text-white font-semibold shadow-md hover:shadow-lg transition">
-
+              <div className="me-8">          
+              <Link href="/user/orders/1">
+               <button className="px-4 py-2 bg-gradient-blue-red text-white font-semibold shadow-md hover:shadow-lg transition">
                   View Details
-
                 </button>
+              </Link>
 
               </div>
 

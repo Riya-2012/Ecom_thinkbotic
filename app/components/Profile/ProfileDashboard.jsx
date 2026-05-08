@@ -15,11 +15,11 @@ import {
 } from "react-icons/fa";
 
 const links = [
-  {
-    name: "Dashboard",
-    href: "/user",
-    icon: <FaUser />,
-  },
+  // {
+  //   name: "Dashboard",
+  //   href: "/user",
+  //   icon: <FaUser />,
+  // },
   {
     name: "My Orders",
     href: "/user/orders",
@@ -62,6 +62,7 @@ export default function ProfileDashboard() {
       <div className="  sticky top-0">
 
         {/* USER CARD */}
+  <Link href="/user/setting">
        <div className="bg-white  shadow-sm border border-gray-100 p-5">
 
   <div className="flex items-center gap-4">
@@ -79,7 +80,7 @@ export default function ProfileDashboard() {
 
     </div>
 
-    {/*  USER INFO */}
+
     <div className="text-left">
 
       <p className="text-sm text-gray-500 font-medium">
@@ -95,8 +96,9 @@ export default function ProfileDashboard() {
   </div>
 
 </div>
+  </Link>
 
-        {/* MENU */}
+  
         <div className="mt-6 p-4 bg-white shadow-sm flex flex-col gap-2">
 
           {links.map((link, index) => {
